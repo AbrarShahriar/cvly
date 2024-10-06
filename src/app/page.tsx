@@ -3,7 +3,7 @@
 import Info from "@/components/layout/info";
 import Templates from "@/components/layout/templates";
 import { MyCV } from "@/components/pdftest";
-import { usePDF } from "@react-pdf/renderer";
+import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 
 export default function Home() {
   const [instance, updateInstance] = usePDF({
