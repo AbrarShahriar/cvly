@@ -110,7 +110,7 @@ export default function Info({ reactPdfUpdate }: any) {
     };
     console.log(payload);
 
-    reactPdfUpdate(MyCV(firstName));
+    reactPdfUpdate(MyCV(payload));
   };
 
   return (

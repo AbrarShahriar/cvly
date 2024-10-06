@@ -28,3 +28,15 @@ export type TemplateType = {
   name: string;
   selected: boolean;
 };
+
+export type PdfPayloadType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  location: string;
+  summary: string;
+  socialLinks: SocialLink[];
+  workExperiences: WorkExperienceType[];
+  educations: EducationType[];
+};

@@ -28,8 +28,6 @@ export default function Template({
       }
     }
 
-    console.log(data);
-
     setTemplates(data);
   };
 
@@ -41,8 +39,8 @@ export default function Template({
       <p className=" text-center font-semibold mb-1">{name}</p>
       <div className="relative">
         <img
-          className={`rounded-lg w-48 h-64 object-cover border-transparent border-4 border-solid transition-all shadow-md  hover:border-blue-500 ${
-            defaultSelected && "border-blue-500 "
+          className={`rounded-lg w-48 h-64 object-cover border-4 border-solid transition-all shadow-md  hover:border-blue-500 ${
+            defaultSelected ? "border-blue-500" : "border-transparent"
           }`}
           src="https://s3.resume.io/cdn-cgi/image/format=auto,fit=scale-down,dpr=1.5,width=154/uploads/local_template_image/image/142/persistent-resource/oslo-resume-templates.jpg"
           alt=""
