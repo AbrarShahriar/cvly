@@ -27,7 +27,7 @@ export default function WorkExperience({
   ...props
 }: WorkExperienceProps) {
   const handleChange = (e: any, type: keyof WorkExperienceType) => {
-    let newValue: any = ["startDate", "endDate", "description"].includes(type)
+    const newValue: any = ["startDate", "endDate", "description"].includes(type)
       ? e
       : e.target.value;
     setWorkExperiences((prevExperiences: WorkExperienceType[]) =>

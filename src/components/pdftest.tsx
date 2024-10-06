@@ -1,13 +1,7 @@
 "use client";
 
 import React from "react";
-import ReactPDF, {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-} from "@react-pdf/renderer";
+import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import { PdfPayloadType } from "@/types";
 
 const templates = {
@@ -29,7 +23,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: "50px",
     padding: "20px",
-    fontFamily: "Arial, Helvetica, sans-serif",
   },
 
   header: {
