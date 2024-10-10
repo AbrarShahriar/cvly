@@ -1,6 +1,5 @@
 "use client";
 
-import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -13,7 +12,20 @@ import {
 } from "react-icons/lu";
 import { Label } from "@radix-ui/react-label";
 import React from "react";
-import { Toggle } from "./ui/toggle";
+
+import Italic from "@tiptap/extension-italic";
+import Bold from "@tiptap/extension-bold";
+import Underline from "@tiptap/extension-underline";
+import Document from "@tiptap/extension-document";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
+
+// 2. Overwrite the keyboard shortcuts
+const CustomItalic = Italic.extend({
+  renderHTML({ HTMLAttributes }) {
+    return ["span", { ...HTMLAttributes, class: "italic" }, 0];
+  },
+});
 
 const ICON_SIZE = 18;
 
@@ -35,7 +47,11 @@ const Tiptap = ({
     },
 
     extensions: [
-      StarterKit,
+      Document,
+      Paragraph,
+      Text,
+      Bold,
+      CustomItalic,
       Placeholder.configure({
         emptyNodeClass:
           "first:before:text-zinc-500 first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none",

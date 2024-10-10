@@ -12,8 +12,7 @@ import { useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import { FaRegSave } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
-import { usePDF } from "@react-pdf/renderer";
-import { MyCV } from "../pdftest";
+import { generatePdf } from "../pageGenerate";
 
 export default function Info({ reactPdfUpdate }: any) {
   const [firstName, setFirstName] = useState("");
@@ -110,7 +109,7 @@ export default function Info({ reactPdfUpdate }: any) {
     };
     console.log(payload);
 
-    reactPdfUpdate(MyCV(payload));
+    reactPdfUpdate(generatePdf(payload));
   };
 
   return (

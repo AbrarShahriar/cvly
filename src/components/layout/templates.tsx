@@ -45,7 +45,7 @@ export default function Templates({ reactPdf }: any) {
       <h3 className="text-xl font-semibold mb-2">Settings</h3>
       <div className="shadow-sm flex flex-col gap-4 rounded-lg p-6 border border-dashed border-slate-900 bg-neutral-200">
         <div className="items-top flex space-x-2">
-          <Checkbox disabled id="pdf-export" />
+          <Checkbox checked={true} id="pdf-export" />
           <div className="grid gap-1.5 leading-none">
             <Label
               htmlFor="pdf-export"
@@ -53,13 +53,10 @@ export default function Templates({ reactPdf }: any) {
             >
               Export PDF
             </Label>
-            <p className="text-sm text-muted-foreground">
-              Currently not available.
-            </p>
           </div>
         </div>
         <div className="items-top flex space-x-2">
-          <Checkbox defaultChecked={true} id="html-export" />
+          <Checkbox disabled id="html-export" />
           <div className="grid gap-1.5 leading-none">
             <Label
               htmlFor="html-export"
@@ -67,6 +64,9 @@ export default function Templates({ reactPdf }: any) {
             >
               Export HTML
             </Label>
+            <p className="text-sm text-muted-foreground">
+              Currently not available.
+            </p>
           </div>
         </div>
 

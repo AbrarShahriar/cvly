@@ -2,12 +2,13 @@
 
 import Info from "@/components/layout/info";
 import Templates from "@/components/layout/templates";
-import { MyCV } from "@/components/pdftest";
+import { generatePdf } from "@/components/pageGenerate";
+import { Document, Page, Text, View } from "@react-pdf/renderer";
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 
 export default function Home() {
   const [instance, updateInstance] = usePDF({
-    document: MyCV(),
+    document: generatePdf(),
   });
 
   return (
