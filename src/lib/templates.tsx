@@ -1,12 +1,12 @@
-import { Toronto } from "@/templates/Toronto";
-import { PdfPayloadType } from "@/types";
-import dynamic from "next/dynamic";
+import { Chicago } from "@/templates/Chicago";
+import { WhiteHouse } from "@/templates/WhiteHouse";
 
-type TemplateNames = "Toronto";
+export type TemplateNames = "Chicago" | "White House";
 
 export const loadTemplate = (name: TemplateNames) => {
   const templates = {
-    Toronto,
+    Chicago,
+    "White House": WhiteHouse,
   };
   return templates[name];
 };

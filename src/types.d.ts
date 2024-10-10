@@ -1,3 +1,5 @@
+import { TemplateNames } from "./lib/templates";
+
 export type SocialLink = {
   id: string;
   title: string;
@@ -25,8 +27,9 @@ export type EducationType = {
 };
 
 export type TemplateType = {
-  name: string;
+  name: TemplateNames;
   selected: boolean;
+  img: string;
 };
 
 export type PdfPayloadType = {

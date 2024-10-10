@@ -111,6 +111,7 @@ export default function Education({
           </div>
 
           <Tiptap
+            defaultValue={education.description}
             callback={(descHTML) => handleChange(descHTML, "description")}
             label="Description"
             placeholder="Highlight your major, degree, and key accomplishments"

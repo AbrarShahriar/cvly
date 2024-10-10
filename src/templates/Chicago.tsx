@@ -8,7 +8,9 @@ import { parseDate, removePfromLi } from "@/lib/utils";
 
 const tw = createTw({});
 
-export const Toronto = (payload: PdfPayloadType) => {
+export const Chicago = (payload: PdfPayloadType) => {
+  console.log("Instantiating Chicago");
+
   return (
     <Document>
       <Page size={"A4"} style={tw(`p-8 pt-12 font-[Lora] text-[11pt]`)}>
@@ -27,9 +29,7 @@ export const Toronto = (payload: PdfPayloadType) => {
           )}
         >
           <Text>{payload.location}</Text>
-          <Text>
-            {payload.phone} {payload.email}
-          </Text>
+          <Text>{payload.phone}</Text>
           <Text>{payload.email}</Text>
         </View>
         <View style={tw(" -mt-2 text-center px-2")}>

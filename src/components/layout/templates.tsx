@@ -7,40 +7,61 @@ import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { SiCodemagic } from "react-icons/si";
+import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.min";
+import { generatePdf } from "../pageGenerate";
 
-export default function Templates({ reactPdf }: any) {
+const date = new Date();
+
+export default function Templates() {
+  const [instance, updateInstance] = usePDF({
+    document: generatePdf({ selectedTemplate: "Chicago" }),
+  });
+
   const [templates, setTemplates] = React.useState<TemplateType[]>([
     {
-      name: "Toronto",
+      name: "Chicago",
       selected: false,
+      img: "https://resumegenius.com/wp-content/uploads/Chicago-Resume-Template-Dark-Blue-Hub.png",
     },
     {
-      name: "Manchester",
+      name: "White House",
       selected: false,
-    },
-    {
-      name: "New York",
-      selected: false,
-    },
-    {
-      name: "Washington",
-      selected: false,
+      img: "https://resumegenius.com/wp-content/uploads/White-House-Resume-Template-Coral-1.png",
     },
   ]);
 
+  const handleGenerate = () => {
+    const isTemplateSelected = templates.some((el) => el.selected);
+    if (!isTemplateSelected) {
+      return alert("Please select a template");
+    }
+
+    const url = instance.url as string;
+    const link = document.createElement("a");
+    link.target = "_blank";
+    link.href = url;
+    link.download = `Resume-${date.getDate()}/${date.getMonth()}/${date.getFullYear()}.pdf`;
+    link.click();
+    link.remove();
+  };
+
   return (
     <div className="w-[70%] mx-auto my-8 min-w-fit bg-neutral-100 py-12 px-8 rounded-lg">
-      <div className="grid grid-cols-4 justify-items-center gap-4 mb-24">
+      <div className="grid grid-cols-4 justify-items-center gap-4 mb-12">
         {templates.map((temp, i) => (
           <Template
+            img={temp.img}
             key={i}
             name={temp.name}
             templates={templates}
             setTemplates={setTemplates}
             defaultSelected={temp.selected}
+            updateInstance={updateInstance}
           />
         ))}
       </div>
+
+      <p className="mb-12 text-center font-bold text-sm">More Coming Soon...</p>
 
       <h3 className="text-xl font-semibold mb-2">Settings</h3>
       <div className="shadow-sm flex flex-col gap-4 rounded-lg p-6 border border-dashed border-slate-900 bg-neutral-200">
@@ -70,14 +91,11 @@ export default function Templates({ reactPdf }: any) {
           </div>
         </div>
 
-        <Button className="p-6 w-fit flex items-centerw-fit row-start-2 row-span-2 mt-2  font-semibold ">
-          <a
-            className="flex items-center w-fit m-4 text-md"
-            href={reactPdf.url as string}
-            download="test.pdf"
-          >
-            <SiCodemagic className="mr-2" /> Generate Your CV
-          </a>
+        <Button
+          onClick={handleGenerate}
+          className="p-6 flex items-center w-fit row-start-2 row-span-2 mt-2  font-semibold "
+        >
+          <SiCodemagic className="mr-2" /> Generate Your CV
         </Button>
       </div>
     </div>

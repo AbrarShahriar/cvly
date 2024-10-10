@@ -1,14 +1,18 @@
 "use client";
 
+import { TemplateNames } from "@/lib/templates";
 import { TemplateType } from "@/types";
 import React from "react";
 import { MdDone } from "react-icons/md";
+import { generatePdf } from "./pageGenerate";
 
 interface TemplateProps {
-  name: string;
+  name: TemplateNames;
   templates: TemplateType[];
   setTemplates: (newVal: TemplateType[]) => void;
   defaultSelected: boolean;
+  updateInstance: any;
+  img: string;
 }
 
 export default function Template({
@@ -16,6 +20,8 @@ export default function Template({
   setTemplates,
   templates,
   defaultSelected,
+  updateInstance,
+  img,
 }: TemplateProps) {
   const handleSelected = () => {
     const data = [...templates];
@@ -23,6 +29,12 @@ export default function Template({
     for (let i = 0; i < data.length; i++) {
       if (data[i].name == name) {
         data[i].selected = !defaultSelected;
+        console.log("Setting template to", name);
+
+        const payload = JSON.parse(
+          localStorage.getItem("resume-draft") as string
+        );
+        updateInstance(generatePdf({ payload, selectedTemplate: name }));
       } else {
         data[i].selected = false;
       }
@@ -42,8 +54,8 @@ export default function Template({
           className={`rounded-lg w-48 h-64 object-cover border-4 border-solid transition-all shadow-md  hover:border-blue-500 ${
             defaultSelected ? "border-blue-500" : "border-transparent"
           }`}
-          src="https://s3.resume.io/cdn-cgi/image/format=auto,fit=scale-down,dpr=1.5,width=154/uploads/local_template_image/image/142/persistent-resource/oslo-resume-templates.jpg"
-          alt=""
+          src={img}
+          alt={name}
         />
         <div
           className={`absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] text-white bg-blue-500 rounded-full transition-opacity p-3 ${

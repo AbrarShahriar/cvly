@@ -1,7 +1,6 @@
 "use client";
 
 import Education from "@/components/Education";
-import { FormButton } from "@/components/formButton";
 import SocialLinkComp from "@/components/SocialLink";
 import Tiptap from "@/components/Tiptap";
 
@@ -13,14 +12,20 @@ import { LuPlus } from "react-icons/lu";
 import { FaRegSave } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { generatePdf } from "../pageGenerate";
+import { Button } from "../ui/button";
+import { Font } from "@react-pdf/renderer/lib/react-pdf.browser.min";
+import { TemplateNames } from "@/lib/templates";
+import { Sumana } from "next/font/google";
 
-export default function Info({ reactPdfUpdate }: any) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [location, setLocation] = useState("");
-  const [summary, setSummary] = useState("");
+export default function Info() {
+  const [firstName, setFirstName] = useState("Abrar");
+  const [lastName, setLastName] = useState("Shahriar");
+  const [email, setEmail] = useState("AbrarShahriar321@gmail.com");
+  const [phone, setPhone] = useState("(+880) 1841210657");
+  const [location, setLocation] = useState("5no Road, Kallyanpur, Dhaka-1207");
+  const [summary, setSummary] = useState(
+    "<p>Tech enthusiast utilizing technologies such as <strong>NextJS, NestJS and Docker</strong> Financial Advisor with 7+ years of experience delivering financial/investment advisory services to high value clients. Proven success in managing multi-million dollar portfolios, driving profitability, and increasing ROI through skillful strategic planning, consulting, and financial advisory services</p>"
+  );
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([
     {
       id: uuidv4(),
@@ -31,10 +36,14 @@ export default function Info({ reactPdfUpdate }: any) {
   const [workExperiences, setWorkExperiences] = useState<WorkExperienceType[]>([
     {
       id: uuidv4(),
-      position: "",
-      employer: "",
-      location: "",
-      description: "",
+      position: "Senior Financial Advisor",
+      employer: "Wells Fargo Advisors",
+      location: "Houston, TX",
+      description: `<ul><li>Deliver financial advice to clients, proposing strategies to achieve short- and long-term objectives for investments, insurance, business and estate planning with minimal risk</li>
+<li>Develop, review, and optimize investment portfolios for 300+ high value clients with over $190M AUM (Assets Under Management)</li>
+<li>Ensure maximum client satisfaction by providing exceptional and personalized service, enhancing client satisfaction ratings from 88% to 99.9% in less than 6 months</li>
+<li>Work closely with specialists from multiple branches, managing investment portfolios for over 800 clients with over $25M in assets under care</li>
+</ul>`,
       startDate: new Date().toDateString(),
       endDate: new Date().toDateString(),
     },
@@ -42,10 +51,11 @@ export default function Info({ reactPdfUpdate }: any) {
   const [educations, setEducations] = useState<EducationType[]>([
     {
       id: uuidv4(),
-      school: "",
-      degree: "",
-      location: "",
-      description: "",
+      school: "Louisiana State University",
+      degree:
+        "Bachelor of Science in Business Administration (concentration: finance)",
+      location: "Baton Rouge, LA",
+      description: "<p>Honors: cum laude (GPA: 3.7/4.0)</p>",
       startDate: new Date().toDateString(),
       endDate: new Date().toDateString(),
     },
@@ -95,7 +105,7 @@ export default function Info({ reactPdfUpdate }: any) {
     ]);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     const payload = {
       firstName,
       lastName,
@@ -109,7 +119,9 @@ export default function Info({ reactPdfUpdate }: any) {
     };
     console.log(payload);
 
-    reactPdfUpdate(generatePdf(payload));
+    localStorage.setItem("resume-draft", JSON.stringify(payload));
+
+    // reactPdfUpdate(generatePdf({ payload, selectedTemplate }));
   };
 
   return (
@@ -122,7 +134,7 @@ export default function Info({ reactPdfUpdate }: any) {
         details. This information helps potential employers reach you easily.
       </p>
 
-      <form action={handleSubmit} className="flex flex-col  w-full">
+      <div className="flex flex-col  w-full pb-4">
         {/* NAME */}
         <div className="flex justify-center gap-5 mb-8">
           <Input
@@ -166,6 +178,7 @@ export default function Info({ reactPdfUpdate }: any) {
 
         {/* SUMMARY */}
         <Tiptap
+          defaultValue={summary}
           callback={(htmlSummary) => setSummary(htmlSummary)}
           label="Summary"
           placeholder="Write 2-3 sentence about yourself."
@@ -249,10 +262,10 @@ export default function Info({ reactPdfUpdate }: any) {
         </div>
 
         {/* SUBMIT */}
-        <FormButton className="flex items-center">
+        <Button onClick={handleSubmit} className="flex items-center w-fit">
           <FaRegSave size={16} className="mr-2" /> Save
-        </FormButton>
-      </form>
+        </Button>
+      </div>
     </div>
   );
 }

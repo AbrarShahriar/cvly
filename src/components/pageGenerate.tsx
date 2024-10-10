@@ -1,11 +1,16 @@
 "use client";
 
-import { Text, View, Page, Document, Font } from "@react-pdf/renderer";
+import {
+  Text,
+  View,
+  Page,
+  Document,
+  Font,
+} from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import React from "react";
 
 import { PdfPayloadType } from "@/types";
-import { createTw } from "react-pdf-tailwind";
-import { loadTemplate } from "@/lib/templates";
+import { loadTemplate, TemplateNames } from "@/lib/templates";
 
 const payload = {
   firstName: "Shahriar",
@@ -58,23 +63,52 @@ const payload = {
   ],
 };
 
-Font.register({
-  family: "Lora",
-  src: "/fonts/Lora/Lora-Regular.ttf",
-});
-Font.register({
-  family: "LoraBold",
-  src: "/fonts/Lora/Lora-Bold.ttf",
-});
-Font.register({
-  family: "LoraItalic",
-  src: "/fonts/Lora/Lora-Italic.ttf",
-});
+function load() {
+  // Lora
+  Font.register({
+    family: "Lora",
+    src: "/fonts/Lora/Lora-Regular.ttf",
+  });
+  Font.register({
+    family: "LoraBold",
+    src: "/fonts/Lora/Lora-Bold.ttf",
+  });
+  Font.register({
+    family: "LoraItalic",
+    src: "/fonts/Lora/Lora-Italic.ttf",
+  });
 
-Font.registerHyphenationCallback((word) => [word]);
+  // Arimo
+  Font.register({
+    family: "Arimo",
+    src: "/fonts/Arimo/Arimo-Regular.ttf",
+  });
+  Font.register({
+    family: "ArimoBold",
+    src: "/fonts/Arimo/Arimo-Bold.ttf",
+  });
+  Font.register({
+    family: "ArimoItalic",
+    src: "/fonts/Arimo/Arimo-Italic.ttf",
+  });
 
-export const generatePdf = (payload?: PdfPayloadType) => {
+  Font.registerHyphenationCallback((word) => [word]);
+}
+
+export const generatePdf = ({
+  payload,
+  selectedTemplate,
+}: {
+  payload?: PdfPayloadType;
+  selectedTemplate: TemplateNames;
+}) => {
+  load();
+
+  console.log("generating...", payload);
+
   if (!payload) {
+    console.log("no payload");
+
     return (
       <Document>
         <Page
@@ -97,5 +131,5 @@ export const generatePdf = (payload?: PdfPayloadType) => {
     );
   }
 
-  return loadTemplate("Toronto")(payload);
+  return loadTemplate(selectedTemplate)(payload);
 };

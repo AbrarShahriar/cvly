@@ -114,6 +114,7 @@ export default function WorkExperience({
           </div>
 
           <Tiptap
+            defaultValue={workExperience.description}
             callback={(htmlVal) => handleChange(htmlVal, "description")}
             label="Description"
             placeholder="Describe your role and achievements"

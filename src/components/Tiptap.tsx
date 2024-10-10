@@ -35,9 +35,15 @@ interface TiptapProps extends React.HTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   placeholder?: string;
   callback: (txt: string) => void;
+  defaultValue: string;
 }
 
-const Tiptap = ({ label = "", placeholder = "", callback }: TiptapProps) => {
+const Tiptap = ({
+  defaultValue = "<p></p>",
+  label = "",
+  placeholder = "",
+  callback,
+}: TiptapProps) => {
   const editor = useEditor({
     onUpdate: (e) => {
       callback(e.editor.getHTML());
@@ -119,6 +125,7 @@ const Tiptap = ({ label = "", placeholder = "", callback }: TiptapProps) => {
         </button>
       </div>
       <EditorContent
+        value={defaultValue}
         className="bg-zinc-200 min-h-[100px] pb-4 px-4 focus-visible:outline-none rounded-b-md"
         editor={editor}
       />

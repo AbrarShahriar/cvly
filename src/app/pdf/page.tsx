@@ -12,7 +12,7 @@ const payload = {
   phone: "01887764008",
   location: "Chittagong",
   summary:
-    '<p><span class="italic">Full-stack Developer</span> utilizing technologies such as <strong>NextJS</strong>, <strong>NestJS</strong> and <strong>Docker</strong></p>',
+    '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet laudantium vel eligendi possimus saepe quis assumenda quod reiciendis, earum dolores architecto magnam similique quia, consequatur error nesciunt minima doloremque veritatis?<span class="italic">Full-stack Developer</span> utilizing technologies such as <strong>NextJS</strong>, <strong>NestJS</strong> and <strong>Docker</strong></p>',
   socialLinks: [
     {
       id: "4aad9ab1-320c-4c6d-a748-462fa93b0379",
@@ -26,8 +26,7 @@ const payload = {
       position: "Freelance Front-End Developer",
       employer: "Siam Khandaker",
       location: "Noakhali",
-      description:
-        "<ul><li><p>Designed a user-friendly website for a graphics designer</p></li><li><p>Used vanilla technologies to ensure instant load</p></li></ul>",
+      description: "<p>etaeta etet etq tq et</p>",
       startDate: "Thu Sep 08 2022",
       endDate: "Thu Dec 22 2022",
     },
@@ -56,22 +55,40 @@ const payload = {
   ],
 };
 
-Font.register({
-  family: "Lora",
-  src: "/fonts/Lora/Lora-Regular.ttf",
-});
-Font.register({
-  family: "LoraBold",
-  src: "/fonts/Lora/Lora-Bold.ttf",
-});
-Font.register({
-  family: "LoraItalic",
-  src: "/fonts/Lora/Lora-Italic.ttf",
-});
+function load() {
+  // Lora
+  Font.register({
+    family: "Lora",
+    src: "/fonts/Lora/Lora-Regular.ttf",
+  });
+  Font.register({
+    family: "LoraBold",
+    src: "/fonts/Lora/Lora-Bold.ttf",
+  });
+  Font.register({
+    family: "LoraItalic",
+    src: "/fonts/Lora/Lora-Italic.ttf",
+  });
+
+  // Arimo
+  Font.register({
+    family: "Arimo",
+    src: "/fonts/Arimo/Arimo-Regular.ttf",
+  });
+  Font.register({
+    family: "ArimoBold",
+    src: "/fonts/Arimo/Arimo-Bold.ttf",
+  });
+  Font.register({
+    family: "ArimoItalic",
+    src: "/fonts/Arimo/Arimo-Italic.ttf",
+  });
+}
 
 Font.registerHyphenationCallback((word) => [word]);
 
 export default function Pdf() {
+  load();
   return (
     <Suspense
       fallback={<h1 className="text-4xl text-white">Loading...</h1>}
@@ -84,7 +101,7 @@ export default function Pdf() {
               <Html>{templates.toronto(payload)}</Html>
             </Page>
           </Document> */}
-          {loadTemplate("Toronto")(payload)}
+          {loadTemplate("White House")(payload)}
           {/* <Document>
             <Page size={"A4"}>
               {["A", "B", "C"].map((el) => (
