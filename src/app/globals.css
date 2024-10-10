@@ -90,3 +90,12 @@ body {
   pointer-events: none;
   height: 0;
 }
+li > p {
+  display: inline;
+}
+
+.prose {
+  & li > p {
+    margin: 0;
+  }
+}

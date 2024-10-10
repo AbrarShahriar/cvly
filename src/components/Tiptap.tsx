@@ -19,8 +19,10 @@ import Underline from "@tiptap/extension-underline";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
+import BulletList from "@tiptap/extension-bullet-list";
+import OrderedList from "@tiptap/extension-ordered-list";
+import ListItem from "@tiptap/extension-list-item";
 
-// 2. Overwrite the keyboard shortcuts
 const CustomItalic = Italic.extend({
   renderHTML({ HTMLAttributes }) {
     return ["span", { ...HTMLAttributes, class: "italic" }, 0];
@@ -35,12 +37,7 @@ interface TiptapProps extends React.HTMLAttributes<HTMLTextAreaElement> {
   callback: (txt: string) => void;
 }
 
-const Tiptap = ({
-  label = "",
-  placeholder = "",
-  callback,
-  ...props
-}: TiptapProps) => {
+const Tiptap = ({ label = "", placeholder = "", callback }: TiptapProps) => {
   const editor = useEditor({
     onUpdate: (e) => {
       callback(e.editor.getHTML());
@@ -52,12 +49,15 @@ const Tiptap = ({
       Text,
       Bold,
       CustomItalic,
+      Underline,
+      ListItem,
+      BulletList,
+      OrderedList,
       Placeholder.configure({
         emptyNodeClass:
           "first:before:text-zinc-500 first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none",
         placeholder,
       }),
-      Underline,
     ],
     content: "",
     immediatelyRender: false,

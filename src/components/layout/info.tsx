@@ -24,30 +24,30 @@ export default function Info({ reactPdfUpdate }: any) {
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([
     {
       id: uuidv4(),
-      title: "Portfolio",
+      title: "",
       link: "",
     },
   ]);
   const [workExperiences, setWorkExperiences] = useState<WorkExperienceType[]>([
     {
       id: uuidv4(),
-      position: "Front End Developer",
-      employer: "Google",
-      location: "LA",
-      description: "N/A",
-      startDate: new Date("10/10/23").toDateString(),
-      endDate: new Date("12/31/23").toDateString(),
+      position: "",
+      employer: "",
+      location: "",
+      description: "",
+      startDate: new Date().toDateString(),
+      endDate: new Date().toDateString(),
     },
   ]);
   const [educations, setEducations] = useState<EducationType[]>([
     {
       id: uuidv4(),
-      school: "BRAC University",
-      degree: "CSE",
-      location: "Dhaka",
-      description: "N/A",
-      startDate: new Date("10/10/23").toDateString(),
-      endDate: new Date("12/31/23").toDateString(),
+      school: "",
+      degree: "",
+      location: "",
+      description: "",
+      startDate: new Date().toDateString(),
+      endDate: new Date().toDateString(),
     },
   ]);
 
@@ -90,7 +90,7 @@ export default function Info({ reactPdfUpdate }: any) {
         location: "",
         description: "",
         startDate: new Date().toDateString(),
-        endDate: "Present",
+        endDate: new Date().toDateString(),
       },
     ]);
   };

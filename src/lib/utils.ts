@@ -24,3 +24,10 @@ export function parseDate(date: string) {
   const dateObj = new Date(date);
   return `${months[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
 }
+
+export function removePfromLi(html: string) {
+  return html.replaceAll(
+    /<li><p>(.*?)<\/p><(\/?)(ol|li|ul)>/gi,
+    "<li>$1<$2$3>"
+  );
+}

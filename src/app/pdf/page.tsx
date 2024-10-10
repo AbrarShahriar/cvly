@@ -2,87 +2,59 @@
 
 import { PDFViewer } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import React, { Suspense } from "react";
-import {
-  Page,
-  Document,
-  Font,
-} from "@react-pdf/renderer/lib/react-pdf.browser.min";
-import Html from "react-pdf-html";
-import { createTw } from "react-pdf-tailwind";
-import { templates } from "@/lib/templates";
-import { View, Text } from "@react-pdf/renderer";
-import { Toronto } from "@/templates/Toronto";
+import { Font } from "@react-pdf/renderer/lib/react-pdf.browser.min";
+import { loadTemplate } from "@/lib/templates";
 
 const payload = {
-  firstName: "Abrar",
-  lastName: "Shahriar",
-  email: "AbrarShahriar321@gmail.com",
-  phone: "+8801841210657",
-  location: "Dhaka, Bangladesh",
+  firstName: "Shahriar",
+  lastName: "Adib",
+  email: "teste@gmail.com",
+  phone: "01887764008",
+  location: "Chittagong",
   summary:
-    "<p><span class='italic'>Financial Advisor with 7+ years of experience delivering financial/investment advisory services to high value clients. Proven success in managing multi-million dollar portfolios, driving profitability, and increasing ROI through skillful strategic planning, consulting, and financial advisory services</span></p>",
+    '<p><span class="italic">Full-stack Developer</span> utilizing technologies such as <strong>NextJS</strong>, <strong>NestJS</strong> and <strong>Docker</strong></p>',
   socialLinks: [
     {
-      id: "e7e7ea57-bcbd-4b0c-afd0-7f864da3e0e7",
+      id: "4aad9ab1-320c-4c6d-a748-462fa93b0379",
       title: "Portfolio",
       link: "",
     },
   ],
   workExperiences: [
     {
-      id: "ef5864e8-d7e2-4f14-9f05-f5f5000819c5",
-      position: "Front End Developer",
-      employer: "Google",
-      location: "LA",
+      id: "2256170f-1a94-48bc-8e1a-289ea2cb52dd",
+      position: "Freelance Front-End Developer",
+      employer: "Siam Khandaker",
+      location: "Noakhali",
       description:
-        "<ul><li>Edit: <strong>hello</strong> <span class='italic'>Italic</span> Italic In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li></ul>",
-      startDate: "Tue Oct 10 2023",
-      endDate: "Sun Dec 31 2023",
+        "<ul><li><p>Designed a user-friendly website for a graphics designer</p></li><li><p>Used vanilla technologies to ensure instant load</p></li></ul>",
+      startDate: "Thu Sep 08 2022",
+      endDate: "Thu Dec 22 2022",
     },
     {
-      id: "ef5864e8-d7e2-4f14-9f05-f5f5000819c5",
-      position: "Front End Developer",
-      employer: "Microsoft",
-      location: "Washington",
+      id: "c8d94935-99b6-4c24-8d47-a7f38846cf77",
+      position: "Freelance Front-End Developer",
+      employer: "Siam Khandaker",
+      startDate: "Thu Sep 08 2022",
+      endDate: "Thu Dec 22 2022",
+      location: "Noakhali",
       description:
-        "<ul><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li></ul>",
-      startDate: "Tue Oct 10 2023",
-      endDate: "Sun Dec 31 2023",
-    },
-    {
-      id: "ef5864e8-d7e2-4f14-9f05-f5f5000819c5",
-      position: "Front End Developer",
-      employer: "Microsoft",
-      location: "Washington",
-      description: `<p>Edit: In my case I use CustomImage.configure({ inline: true })</p>`,
-      startDate: "Tue Oct 10 2023",
-      endDate: "Sun Dec 31 2023",
+        "<ul><li><p>Designed a user-friendly website for a graphics designer</p></li><li><p>Used vanilla technologies to ensure instant load</p></li></ul>",
     },
   ],
   educations: [
     {
-      id: "1332f380-611c-411e-b68d-abd6178c9815",
+      id: "260e8d99-7263-43b5-bd2e-349842d3aed7",
       school: "BRAC University",
-      degree: "CSE",
-      location: "Dhaka",
-      description: "<ul><li>Jello</li><li>Hello</li></ul>",
-      startDate: "Tue Oct 10 2023",
-      endDate: "Present",
-    },
-    {
-      id: "1332f380-611c-411e-b68d-abd6178c9815",
-      school: "BRAC University",
-      degree: "CSE",
+      degree: "Bachelor of Science in Computer Science & Engineering",
       location: "Dhaka",
       description:
-        "<ul><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li><li>Edit: In my case I use CustomImage.configure({ inline: true }), because I need the paragraph tag around image. But may be you don't need that.</li><li>Where can I find updates on this for v2? I am trying to use bubble menu to set classes like left, center or right to images. How do I approach this? Also how do I retain existing classes on images?</li></ul>",
-      startDate: "Tue Oct 10 2023",
+        "<p>Finished 1st Semester. CGPA: <strong>(3.93/4.00)</strong></p>",
+      startDate: "Tue May 28 2024",
       endDate: "Present",
     },
   ],
 };
-
-const tw = createTw({});
 
 Font.register({
   family: "Lora",
@@ -112,7 +84,7 @@ export default function Pdf() {
               <Html>{templates.toronto(payload)}</Html>
             </Page>
           </Document> */}
-          {Toronto(payload)}
+          {loadTemplate("Toronto")(payload)}
           {/* <Document>
             <Page size={"A4"}>
               {["A", "B", "C"].map((el) => (

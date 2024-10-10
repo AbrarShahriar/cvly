@@ -32,8 +32,8 @@ export default function WorkExperience({
       : e.target.value;
     setWorkExperiences((prevExperiences: WorkExperienceType[]) =>
       prevExperiences.map((experience) =>
-        experience.id === experience.id
-          ? { ...experience, [type]: newValue }
+        experience.id === workExperience.id
+          ? { ...workExperience, [type]: newValue }
           : experience
       )
     );

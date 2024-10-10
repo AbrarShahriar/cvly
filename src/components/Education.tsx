@@ -32,7 +32,7 @@ export default function Education({
       : e.target.value;
     setEducations((prevEducations: WorkExperienceType[]) =>
       prevEducations.map((ed) =>
-        ed.id === education.id ? { ...ed, [type]: newValue } : ed
+        ed.id === education.id ? { ...education, [type]: newValue } : ed
       )
     );
   };
