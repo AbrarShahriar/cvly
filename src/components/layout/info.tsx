@@ -7,7 +7,7 @@ import Tiptap from "@/components/Tiptap";
 import { Input } from "@/components/ui/input";
 import WorkExperience from "@/components/WorkExperience";
 import { EducationType, SocialLink, WorkExperienceType } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import { FaRegSave } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
@@ -16,8 +16,12 @@ import { Button } from "../ui/button";
 import { Font } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import { TemplateNames } from "@/lib/templates";
 import { Sumana } from "next/font/google";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { TiWarningOutline } from "react-icons/ti";
+import AlertBox from "../AlertBox";
 
 export default function Info() {
+  const [isDraftSaved, setIsDraftSaved] = useState(false);
   const [firstName, setFirstName] = useState("Abrar");
   const [lastName, setLastName] = useState("Shahriar");
   const [email, setEmail] = useState("AbrarShahriar321@gmail.com");
@@ -121,8 +125,14 @@ export default function Info() {
 
     localStorage.setItem("resume-draft", JSON.stringify(payload));
 
+    setIsDraftSaved(true);
+
     // reactPdfUpdate(generatePdf({ payload, selectedTemplate }));
   };
+
+  useEffect(() => {
+    setIsDraftSaved(Boolean(localStorage.getItem("resume-draft")));
+  }, []);
 
   return (
     <div className="outline-2 w-[70%] m-auto my-32 p-8 pb-4 rounded-lg  bg-neutral-100 shadow-md">
@@ -261,8 +271,21 @@ export default function Info() {
           </p>
         </div>
 
+        {isDraftSaved ? (
+          <AlertBox
+            className="mb-6"
+            variant="warning"
+            message="A draft is already saved, proceed to overwrite!"
+          />
+        ) : (
+          <AlertBox
+            className="mb-6"
+            variant="error"
+            message="Do not proceed without saving the draft!"
+          />
+        )}
         {/* SUBMIT */}
-        <Button onClick={handleSubmit} className="flex items-center w-fit">
+        <Button onClick={handleSubmit} className="flex items-center w-fit ">
           <FaRegSave size={16} className="mr-2" /> Save
         </Button>
       </div>

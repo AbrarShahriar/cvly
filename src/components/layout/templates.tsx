@@ -9,6 +9,7 @@ import { Label } from "../ui/label";
 import { SiCodemagic } from "react-icons/si";
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import { generatePdf } from "../pageGenerate";
+import { Modal } from "../Modal";
 
 const date = new Date();
 
@@ -30,10 +31,18 @@ export default function Templates() {
     },
   ]);
 
+  const [openNotSavedModal, setOpenNotSavedModal] = React.useState(false);
+  const [openNoThemeModal, setOpenNoThemeModal] = React.useState(false);
+
   const handleGenerate = () => {
+    const isDraftSaved = Boolean(localStorage.getItem("resume-draft"));
+    if (!isDraftSaved) {
+      return setOpenNotSavedModal(true);
+    }
+
     const isTemplateSelected = templates.some((el) => el.selected);
     if (!isTemplateSelected) {
-      return alert("Please select a template");
+      return setOpenNoThemeModal(true);
     }
 
     const url = instance.url as string;
@@ -97,6 +106,19 @@ export default function Templates() {
         >
           <SiCodemagic className="mr-2" /> Generate Your CV
         </Button>
+
+        <Modal
+          title="Oops!"
+          description="Seems like you forgot to save your draft. Please save it first and then proceed."
+          open={openNotSavedModal}
+          setOpen={setOpenNotSavedModal}
+        />
+        <Modal
+          title="Oops!"
+          description="Seems like you forgot to choose a theme. Please choose a theme first."
+          open={openNoThemeModal}
+          setOpen={setOpenNoThemeModal}
+        />
       </div>
     </div>
   );

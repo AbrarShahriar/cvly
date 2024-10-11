@@ -92,6 +92,7 @@ body {
 }
 li > p {
   display: inline;
+  /* color: #c7a10b; */
 }
 
 .prose {
