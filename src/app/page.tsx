@@ -15,6 +15,7 @@ import {
   FaGithubSquare,
   FaLinkedin,
 } from "react-icons/fa";
+import Step from "@/components/Step";
 
 const otr = "outline outline-black";
 
@@ -22,16 +23,23 @@ const ICON_SIZE = 26;
 
 const features = [
   {
-    icon: <HiLightningBolt size={ICON_SIZE} />,
-    title: "Edit Your Resume in Real Time",
-    description:
-      "As you edit your resume with our builder, you’ll see the changes applied to your document.",
-  },
-  {
     icon: <FaPiggyBank size={ICON_SIZE} />,
     title: "100% Free download",
     description:
       "Ability to download and print resumes in PDF and plain text formatting with no limit",
+  },
+  {
+    icon: <FaUserSecret size={ICON_SIZE} />,
+    title: "NO Hidden Fees",
+    description:
+      "With CVly, you won’t spend hours working on your resume, just to be hit with a hidden paywall.",
+  },
+
+  {
+    icon: <HiLightningBolt size={ICON_SIZE} />,
+    title: "Edit Your Resume in Real Time",
+    description:
+      "As you edit your resume with our builder, you’ll see the changes applied to your document.",
   },
   {
     icon: <BsFillShieldLockFill size={ICON_SIZE} />,
@@ -40,22 +48,16 @@ const features = [
       "No data is sent to our server, everything is stored locally on your device.",
   },
   {
-    icon: <PiFilesFill size={ICON_SIZE} />,
-    title: "Multi-format resume options",
-    description:
-      "Save your resume in any common format, including HTML and PDF in a single click.",
-  },
-  {
-    icon: <FaUserSecret size={ICON_SIZE} />,
-    title: "NO Hidden Fees",
-    description:
-      "With CVly, you won’t spend hours working on your resume, just to be hit with a hidden paywall.",
-  },
-  {
     icon: <MdOutlineDocumentScanner size={ICON_SIZE} />,
     title: "ATS-friendly templates",
     description:
       "Our templates are ATS-friendly meaning your resume won’t automatically be rejected by a bot!.",
+  },
+  {
+    icon: <PiFilesFill size={ICON_SIZE} />,
+    title: "Multi-format resume options",
+    description:
+      "Save your resume in any common format, including HTML and PDF in a single click.",
   },
 ];
 
@@ -83,20 +85,38 @@ const faqs = [
   },
 ];
 
+const steps = [
+  {
+    title: "Fill in the Blanks",
+    description:
+      "Fill in your resume information, let our AI content analyzer do its job, and see your resume changes dynamically in real time.",
+    imgSrc: "/assets/step1.svg",
+  },
+  {
+    title: "Pick a Template",
+    description:
+      "Do not sabotage your job search before it has even begun. Choose from our ATS-friendly, hand-crafted resume templates.",
+    imgSrc: "/assets/step2.svg",
+  },
+  {
+    title: "Hit Download!",
+    description:
+      "And yes, it is free! We do not hit you with a paywall once you have completed your resume in the Basic Account. If you use any of our premium features, the software will let you know about it.",
+    imgSrc: "/assets/step3.svg",
+  },
+];
+
 export default function Landing() {
   return (
-    <div className="bg-neutral-100 text-blue-950 ">
+    <div className="bg-neutral-100 text-blue-950 transform-gpu overflow-x-hidden">
       {/* HEADER */}
-
-      <header className="flex items-center justify-between w-full bg-[rgba(255,255,255,0.5)] backdrop-blur-[6px] py-4 px-16 mb-12  fixed top-0 z-50 border-b border-solid border-[rgba(255, 255, 255, 0.18)]">
+      <header className="flex items-center justify-between w-full bg-[rgba(255,255,255,0.5)] backdrop-blur-[6px] py-4 px-16 mb-12  fixed top-0 z-50 border-b border-solid border-[rgba(255, 255, 255, 0.18)] max-md:px-4">
         <p className="font-bold text-xl">CVly</p>
         <nav className="flex items-center justify-between gap-6 ">
           <Link className="cursor-pointer" href={"/#faq"}>
             FAQ
           </Link>
-          <Link className="cursor-pointer" href={"/#contact"}>
-            Contact
-          </Link>
+
           <Link className="cursor-pointer" href={"/create"}>
             <Button>Get Started</Button>
           </Link>
@@ -105,58 +125,51 @@ export default function Landing() {
 
       {/* HERO SECTION */}
       <section
-        className={`relative flex items-center justify-between px-16 pt-16 `}
+        className={`relative flex items-center justify-between px-16 pt-16 max-md:py-32 max-md:px-8`}
       >
         <img
-          className="absolute object-contain w-[100%] -top-[70%] -left-[40%] z-10 opacity-40 "
+          className="absolute object-contain w-[100%] -top-[40%] -left-[40%] z-10 opacity-40 max-md:top-0 animate-spin"
           src="/assets/hero-bg.svg"
           alt=""
         />
         <img
-          className="absolute object-contain w-[100%] -top-[90%] -right-[40%] z-10 opacity-50 "
+          className="absolute object-contain w-[100%] -top-[90%] -right-[40%] z-10 opacity-50 max-md:top-[50%] animate-spin delay-500"
           src="/assets/hero-bg.svg"
           alt=""
         />
-        <div className={`w-[50%] text-left -mt-20 z-20`}>
-          <p className="w-fit text-sm font-semibold opacity-70 mb-4">
+        <div
+          className={`w-[50%] text-left -mt-20 z-20 max-md:mt-12 max-md:w-full max-md:text-center`}
+        >
+          <p className="w-fit text-sm font-semibold opacity-70 mb-4 max-md:w-full">
             ONLINE RESUME BUILDER
           </p>
-          <h2 className=" text-4xl w-fit font-bold mb-4">
+          <h2 className=" text-4xl w-fit font-bold mb-4 max-md:w-full max-md:text-5xl">
             Create Your Perfect Resume Today
           </h2>
-          <p className="text-lg font-semibold w-[80%]  opacity-90 mb-8">
+          <p className="text-lg font-semibold w-[80%]  opacity-90 mb-8 max-md:w-full">
             Only 2% of resumes make it past the first round. Be in the top 2%
           </p>
-          <Button className="font-semibold text-lg px-10 py-6 transition-all shadow-md ">
-            Create my resume
-          </Button>
+          <Link href={"/create"}>
+            <Button className="font-bold text-lg px-10 py-6 transition-all shadow-md max-md:w-full max-md:text-xl max-md:py-8 max-md:px-8">
+              Create my resume
+            </Button>
+          </Link>
         </div>
         <img
-          className={`z-20 w-[50%] object-cover scale-110 mt-8`}
+          className={` z-20 w-[50%] object-cover scale-110 mt-8 max-md:hidden`}
           src={"/assets/hero2.svg"}
           alt=""
         />
       </section>
 
-      {/* <div className="flex items-start justify-between mb-24 ">
-        <hr className="w-[40%] opacity-50 m-auto bg-black h-[1px] mb-16" />
-        <IoIosArrowRoundDown
-          className="opacity-50 -mt-2"
-          size={32}
-          color="black"
-        />
-        <hr className="w-[40%] opacity-50 m-auto bg-black h-[1px] mb-16" />
-      </div> */}
-
       {/* FEATURES */}
-      {/* <main className="bg-[url('/assets/feature-bg.svg')] bg-cover "> */}
       <main className="bg-blue-900 py-24 mb-24 relative">
-        <div className="triangle-1"></div>
-        <h1 className="text-center text-3xl font-bold mb-4 w-[50%] m-auto text-white">
+        <div className="triangle-1 max-md:hidden"></div>
+        <h1 className="text-center text-3xl font-bold mb-4 w-[50%] m-auto text-white max-md:w-[80%]">
           Features designed to help you win your dream job
         </h1>
         <div className="h-[7px] m-auto rounded-xl bg-cyan-600 w-[50px] mb-12" />
-        <section className="grid grid-cols-3 gap-2 m-auto justify-items-center rounded-lg p-8 text-blue-950  w-[80%] shadow-sm bg-[rgba(255,255,255,1)] backdrop-blur-[4px] border-solid border-[rgba(255, 255, 255, 0.5)]">
+        <section className="grid grid-cols-3 gap-2 m-auto justify-items-center rounded-lg p-8 text-blue-950  w-[80%] shadow-sm bg-[rgba(255,255,255,1)] backdrop-blur-[4px] border-solid border-[rgba(255, 255, 255, 0.5)] max-md:grid-cols-1 max-sm:w-[90%]">
           {features.map((feature, i) => (
             <Feature
               description={feature.description}
@@ -166,11 +179,11 @@ export default function Landing() {
             />
           ))}
         </section>
-        <div className="triangle-2"></div>
+        <div className="triangle-2 max-md:hidden"></div>
       </main>
 
       {/* HOW IT WORKS */}
-      <h1 className="text-center text-3xl font-bold mb-2 w-[50%] m-auto">
+      <h1 className="text-center text-3xl font-bold mb-2 w-[50%] m-auto max-md:w-[80%]">
         Build Your Resume Fast and Easy
       </h1>
       <div className="h-[7px] m-auto rounded-xl bg-pink-600 w-[50px] mb-6" />
@@ -178,71 +191,33 @@ export default function Landing() {
         CVly is lightning fast. There is no software to download. No multi-part
         sign-up form. No long-winded tutorials. Just a straightforward process.
       </p>
-      <section className="flex flex-col gap-4 w-[70%] m-auto mb-24">
+      <section className="flex flex-col gap-4 w-[70%] m-auto mb-24 max-md:w-full">
         {/* step 1 */}
-        <main className={`flex items-center justify-between`}>
-          <div className="flex flex-col items-end  w-[50%] gap-8">
-            <h1 className="bg-pink-600 text-white rounded-md flex items-center justify-center text-5xl font-bold w-[96px] h-[96px]">
-              1
-            </h1>
-            <div className="bg-neutral-200 p-8 rounded-md">
-              <h4 className="text-lg font-bold mb-4">Fill in the Blanks</h4>
-              <p>
-                Fill in your resume information, let our AI content analyzer do
-                its job, and see your resume changes dynamically in real time.
-              </p>
-            </div>
-          </div>
-          <img className="w-[70%]" src="/assets/step1.svg" alt="" />
-        </main>
-        {/* step 2 */}
-        <main className={`flex flex-row-reverse items-center justify-between`}>
-          <div className="flex flex-col items-start  w-[50%] gap-8">
-            <h1 className="bg-cyan-600 text-white rounded-md flex items-center justify-center text-5xl font-bold w-[96px] h-[96px]">
-              2
-            </h1>
-            <div className="bg-neutral-200 p-8 rounded-md">
-              <h4 className="text-lg font-bold mb-4">Pick a Template</h4>
-              <p>
-                Do not sabotage your job search before it has even begun. Choose
-                from our ATS-friendly, hand-crafted resume templates
-              </p>
-            </div>
-          </div>
-          <img className="w-[70%]" src="/assets/step2.svg" alt="" />
-        </main>
-        {/* step 4 */}
-        <main className={`flex items-center justify-between -mt-12`}>
-          <div className="flex flex-col items-end  w-[50%] gap-8">
-            <h1 className="bg-pink-600 text-white rounded-md flex items-center justify-center text-5xl font-bold w-[96px] h-[96px]">
-              3
-            </h1>
-            <div className="bg-neutral-200 p-8 rounded-md">
-              <h4 className="text-lg font-bold mb-4">Hit Download!</h4>
-              <p>
-                And yes, it is free! We do not hit you with a paywall once you
-                have completed your resume in the Basic Account. If you use any
-                of our premium features, the software will let you know about
-                it.
-              </p>
-            </div>
-          </div>
-          <img className="w-[70%]" src="/assets/step3.svg" alt="" />
-        </main>
+        {steps.map((step, i) => (
+          <Step
+            key={i}
+            description={step.description}
+            imgSrc={step.imgSrc}
+            stepNumber={i}
+            title={step.title}
+          />
+        ))}
       </section>
 
       {/* SECONDARY CALL TO ACTION */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-900 w-[90%] flex items-center justify-between m-auto rounded-xl px-16 shadow-lg mb-32">
-        <div>
-          <h1 className="text-3xl max-w-[70%] font-bold text-white mb-6">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-900 w-[90%] flex items-center justify-between m-auto rounded-xl px-16 shadow-lg mb-32 max-md:pt-8 max-md:px-2 max-md:flex-col max-md:gap-12">
+        <div className="flex flex-col max-md:items-center max-md:px-8">
+          <h1 className="text-3xl max-w-[70%] font-bold text-white mb-6 max-sm:max-w-full max-md:text-center max-md:mb-8">
             Start building your resume today, land your dream job tomorrow
           </h1>
-          <Button className="bg-white text-black font-semibold text-md px-8 py-6">
-            Create my resume
-          </Button>
+          <Link href={"/create"}>
+            <Button className="bg-white text-black font-bold text-md px-8 py-6 w-fit hover:bg-neutral-200 max-md:text-xl max-md:py-8">
+              Create my resume
+            </Button>
+          </Link>
         </div>
         <img
-          className="w-[350px] animate-float"
+          className="w-[350px] animate-float max-md:w-full"
           src="/assets/document-stack.png"
           alt=""
         />
@@ -251,15 +226,15 @@ export default function Landing() {
       {/* FAQ */}
       <main
         id="faq"
-        className="flex items-start justify-between m-auto w-[80%] mb-24"
+        className="flex items-start justify-between m-auto w-[80%] mb-24 max-md:flex-col max-md:items-center"
       >
         <div>
-          <h1 className="text-left text-3xl font-bold mb-4 ">
+          <h1 className="text-left text-3xl font-bold mb-4 max-md:text-center">
             Frequently asked questions
           </h1>
-          <div className="h-[7px] mr-auto rounded-xl bg-cyan-600 w-[50px] mb-6" />
+          <div className="h-[7px] mr-auto rounded-xl bg-cyan-600 w-[50px] mb-6 max-md:m-auto max-md:mb-8" />
         </div>
-        <section className="flex flex-col w-[70%] gap-8">
+        <section className="flex flex-col w-[70%] gap-8 max-md:w-[90%]">
           {faqs.map((faq, i) => (
             <Accordion
               description={faq.description}
@@ -272,9 +247,11 @@ export default function Landing() {
 
       {/* Footer */}
       <section className="bg-blue-950 text-white p-16 ">
-        <main className="grid grid-cols-3">
+        <main className="grid grid-cols-3 justify-items-center max-md:grid-cols-1 max-md:gap-8 max-md:text-center">
           <div>
-            <h1 className="text-xl mb-4 font-semibold">Job Seekers</h1>
+            <h1 className="text-xl mb-4 font-semibold max-md:mb-4">
+              Job Seekers
+            </h1>
             <div className="flex flex-col ">
               <Link className="cursor-pointer" href={"/create"}>
                 Build a resume
@@ -300,34 +277,34 @@ export default function Landing() {
           </div>
           <div>
             <h1 className="text-xl mb-4 font-semibold">Stay Connected</h1>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 max-md:gap-8">
               <Link
                 className="cursor-pointer"
                 target="_blank"
                 href={"https://www.linkedin.com/in/abrar-shahriar-kabir/"}
               >
-                <FaLinkedin size={30} />
+                <FaLinkedin size={32} />
               </Link>
               <Link
                 className="cursor-pointer"
                 target="_blank"
                 href={"https://github.com/AbrarShahriar"}
               >
-                <FaGithubSquare size={30} />
+                <FaGithubSquare size={32} />
               </Link>
               <Link
                 className="cursor-pointer"
                 target="_blank"
                 href={"https://www.facebook.com/abrar.shahriar.kabir/"}
               >
-                <FaFacebookSquare size={30} />
+                <FaFacebookSquare size={32} />
               </Link>
               <Link
                 className="cursor-pointer"
                 target="_blank"
                 href={"https://www.instagram.com/abrar_shahr1ar/"}
               >
-                <FaInstagramSquare size={30} />
+                <FaInstagramSquare size={32} />
               </Link>
             </div>
           </div>
