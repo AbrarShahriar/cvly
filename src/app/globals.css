@@ -70,6 +70,7 @@
 
 body {
   background: url("/assets/bg.svg") repeat;
+  overflow-x: hidden;
 }
 
 .ProseMirror:focus {
@@ -99,4 +100,34 @@ li > p {
   & li > p {
     margin: 0;
   }
+}
+
+.triangle-1 {
+  height: 150px;
+  width: 150px;
+  top: -150px;
+  position: absolute;
+  overflow: hidden;
+}
+.triangle-1:before {
+  content: "";
+  display: block;
+  height: 100%;
+  border-radius: 0 0 0 50%;
+  box-shadow: 0 0 0 150px #1e3a8a;
+}
+.triangle-2 {
+  height: 150px;
+  width: 150px;
+  bottom: -150px;
+  right: 0;
+  position: absolute;
+  overflow: hidden;
+}
+.triangle-2:before {
+  content: "";
+  display: block;
+  height: 100%;
+  border-radius: 0 50% 0 0;
+  box-shadow: 0 0 0 150px #1e3a8a;
 }
