@@ -13,6 +13,7 @@ import { EducationType, WorkExperienceType } from "@/types";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
+import { parseDate } from "@/lib/utils";
 
 interface WorkExperienceProps {
   education: EducationType;
@@ -50,20 +51,18 @@ export default function Education({
     <div className="flex gap-4 items-center w-full">
       <Card className="bg-neutral-100 rounded-md w-full outline-1 outline-dashed outline-slate-700">
         <CardHeader>
-          {/* <CardTitle>
-            {!workExperience.position || !workExperience.employer
+          <CardTitle>
+            {!education.degree || !education.school
               ? "Unspecified"
-              : `${workExperience.position} at ${workExperience.employer}`}
+              : `Studying ${education.degree} from ${education.school}`}
           </CardTitle>
           <CardDescription>
-            From {workExperience.date.start.toDateString()} to{" "}
-            {workExperience.date.end.toDateString()}
-          </CardDescription> */}
-          <CardTitle>Education {index + 1}</CardTitle>
-          <CardDescription>Please add correct information</CardDescription>
+            From {parseDate(education.startDate)} to{" "}
+            {parseDate(education.endDate)}
+          </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-5">
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-md:flex-col">
             <Input
               className="bg-neutral-200"
               defaultValue={education.school}
@@ -77,12 +76,12 @@ export default function Education({
               onChange={(e) => handleChange(e, "degree")}
             />
           </div>
-          <div className="flex gap-4">
-            <div className="flex flex-col max-w-[50%] w-full">
+          <div className="flex gap-4 max-md:flex-col">
+            <div className="flex flex-col max-w-[50%] w-full max-md:max-w-full">
               <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
                 Start & End Date
               </Label>
-              <div className="flex gap-4 w-full items-end justify-between ">
+              <div className="flex gap-4 w-full items-end justify-between max-md:flex-col">
                 <DatePicker
                   date={new Date(education.startDate)}
                   onChange={(e) => handleChange(e, "startDate")}

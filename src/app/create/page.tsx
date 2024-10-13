@@ -7,8 +7,11 @@ import React from "react";
 export default function Home() {
   return (
     <div>
+      <h1 className="text-white text-4xl text-center font-bold mt-32 mb-8">
+        Start Creating
+      </h1>
       <Info />
-      <h1 className="text-white text-4xl text-center font-bold">
+      <h1 className="text-white text-4xl text-center font-bold mb-8">
         Choose A Template
       </h1>
       <Templates />

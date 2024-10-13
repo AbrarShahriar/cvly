@@ -49,7 +49,11 @@ export default function SocialLinkComp({
         type="url"
         onChange={(e) => handleChange(e, "link")}
       />
-      <Button variant="ghost" onClick={(e) => handleSocialLinkDelete(e)}>
+      <Button
+        className="max-md:px-0"
+        variant="ghost"
+        onClick={(e) => handleSocialLinkDelete(e)}
+      >
         <RiDeleteBinLine className="text-red-600" size={22} />
       </Button>
     </div>

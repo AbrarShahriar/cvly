@@ -11,25 +11,17 @@ import { useEffect, useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import { FaRegSave } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
-import { generatePdf } from "../pageGenerate";
 import { Button } from "../ui/button";
-import { Font } from "@react-pdf/renderer/lib/react-pdf.browser.min";
-import { TemplateNames } from "@/lib/templates";
-import { Sumana } from "next/font/google";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { TiWarningOutline } from "react-icons/ti";
 import AlertBox from "../AlertBox";
 
 export default function Info() {
   const [isDraftSaved, setIsDraftSaved] = useState(false);
-  const [firstName, setFirstName] = useState("Abrar");
-  const [lastName, setLastName] = useState("Shahriar");
-  const [email, setEmail] = useState("AbrarShahriar321@gmail.com");
-  const [phone, setPhone] = useState("(+880) 1841210657");
-  const [location, setLocation] = useState("5no Road, Kallyanpur, Dhaka-1207");
-  const [summary, setSummary] = useState(
-    "<p>Tech enthusiast utilizing technologies such as <strong>NextJS, NestJS and Docker</strong> Financial Advisor with 7+ years of experience delivering financial/investment advisory services to high value clients. Proven success in managing multi-million dollar portfolios, driving profitability, and increasing ROI through skillful strategic planning, consulting, and financial advisory services</p>"
-  );
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
+  const [summary, setSummary] = useState("");
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([
     {
       id: uuidv4(),
@@ -40,14 +32,10 @@ export default function Info() {
   const [workExperiences, setWorkExperiences] = useState<WorkExperienceType[]>([
     {
       id: uuidv4(),
-      position: "Senior Financial Advisor",
-      employer: "Wells Fargo Advisors",
-      location: "Houston, TX",
-      description: `<ul><li>Deliver financial advice to clients, proposing strategies to achieve short- and long-term objectives for investments, insurance, business and estate planning with minimal risk</li>
-<li>Develop, review, and optimize investment portfolios for 300+ high value clients with over $190M AUM (Assets Under Management)</li>
-<li>Ensure maximum client satisfaction by providing exceptional and personalized service, enhancing client satisfaction ratings from 88% to 99.9% in less than 6 months</li>
-<li>Work closely with specialists from multiple branches, managing investment portfolios for over 800 clients with over $25M in assets under care</li>
-</ul>`,
+      position: "",
+      employer: "",
+      location: "",
+      description: ``,
       startDate: new Date().toDateString(),
       endDate: new Date().toDateString(),
     },
@@ -55,11 +43,10 @@ export default function Info() {
   const [educations, setEducations] = useState<EducationType[]>([
     {
       id: uuidv4(),
-      school: "Louisiana State University",
-      degree:
-        "Bachelor of Science in Business Administration (concentration: finance)",
-      location: "Baton Rouge, LA",
-      description: "<p>Honors: cum laude (GPA: 3.7/4.0)</p>",
+      school: "",
+      degree: "",
+      location: "",
+      description: "",
       startDate: new Date().toDateString(),
       endDate: new Date().toDateString(),
     },
@@ -126,8 +113,6 @@ export default function Info() {
     localStorage.setItem("resume-draft", JSON.stringify(payload));
 
     setIsDraftSaved(true);
-
-    // reactPdfUpdate(generatePdf({ payload, selectedTemplate }));
   };
 
   useEffect(() => {
@@ -135,18 +120,18 @@ export default function Info() {
   }, []);
 
   return (
-    <div className="outline-2 w-[70%] m-auto my-32 p-8 pb-4 rounded-lg  bg-neutral-100 shadow-md">
+    <div className="outline-2 w-[70%] m-auto mb-32 p-8 pb-4 rounded-lg  bg-neutral-100 shadow-md max-md:w-full">
       <h1 className="text-3xl font-bold text-slate-800 mb-2">
         Personal Details
       </h1>
-      <p className="mb-10 text-sm opacity-80 w-[70%]">
+      <p className="mb-10 text-sm opacity-80 w-[70%] max-md:w-[90%]">
         Please provide your full name, contact information, and other relevant
         details. This information helps potential employers reach you easily.
       </p>
 
       <div className="flex flex-col  w-full pb-4">
         {/* NAME */}
-        <div className="flex justify-center gap-5 mb-8">
+        <div className="flex justify-center gap-5 mb-8 max-md:flex-col">
           <Input
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -162,7 +147,7 @@ export default function Info() {
         </div>
 
         {/* CONTACT */}
-        <div className="flex justify-center gap-5 mb-8">
+        <div className="flex justify-center gap-5 mb-8 max-md:flex-col">
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -196,7 +181,7 @@ export default function Info() {
 
         {/* SOCIAL LINKS */}
         <h2 className="text-2xl font-bold text-slate-800 mt-10 mb-2">
-          Social Links
+          Social Links (Work In Progress)
         </h2>
         <p className="text-sm opacity-80 w-[70%] mb-6">
           Include links to your professional social media profiles, such as
@@ -224,7 +209,7 @@ export default function Info() {
         <h1 className="text-3xl font-bold text-slate-800 mb-2">
           Work Experience
         </h1>
-        <p className="mb-10 text-sm opacity-80 w-[70%]">
+        <p className="mb-10 text-sm opacity-80 w-[70%] max-md:w-[90%]">
           List your previous roles, including job titles, company names, and
           employment dates. Highlight key responsibilities, achievements, and
           skills gained in each position.
@@ -285,7 +270,10 @@ export default function Info() {
           />
         )}
         {/* SUBMIT */}
-        <Button onClick={handleSubmit} className="flex items-center w-fit ">
+        <Button
+          onClick={handleSubmit}
+          className="flex items-center w-fit max-md:text-lg max-md:font-bold max-md:px-8 max-md:py-6"
+        >
           <FaRegSave size={16} className="mr-2" /> Save
         </Button>
       </div>

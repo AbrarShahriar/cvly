@@ -2,20 +2,12 @@
 
 import Placeholder from "@tiptap/extension-placeholder";
 import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import {
-  LuBold,
-  LuItalic,
-  LuList,
-  LuListOrdered,
-  LuUnderline,
-} from "react-icons/lu";
+import { LuBold, LuItalic, LuList, LuListOrdered } from "react-icons/lu";
 import { Label } from "@radix-ui/react-label";
 import React from "react";
 
 import Italic from "@tiptap/extension-italic";
 import Bold from "@tiptap/extension-bold";
-import Underline from "@tiptap/extension-underline";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
@@ -55,7 +47,6 @@ const Tiptap = ({
       Text,
       Bold,
       CustomItalic,
-      Underline,
       ListItem,
       BulletList,
       OrderedList,
@@ -65,7 +56,7 @@ const Tiptap = ({
         placeholder,
       }),
     ],
-    content: "",
+    content: defaultValue,
     immediatelyRender: false,
   });
 
@@ -99,14 +90,7 @@ const Tiptap = ({
         >
           <LuItalic size={ICON_SIZE} />
         </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor?.chain().focus().toggleUnderline()?.run();
-          }}
-        >
-          <LuUnderline size={ICON_SIZE} />
-        </button>
+
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -125,7 +109,6 @@ const Tiptap = ({
         </button>
       </div>
       <EditorContent
-        value={defaultValue}
         className="bg-zinc-200 min-h-[100px] pb-4 px-4 focus-visible:outline-none rounded-b-md"
         editor={editor}
       />
