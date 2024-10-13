@@ -64,6 +64,7 @@ export default function Templates() {
         <div className="grid grid-cols-4 py-8 gap-12 px-4 max-md:grid-cols-2 max-md:justify-items-center">
           {templates.map((temp, i) => (
             <Template
+              key={i}
               img={temp.img}
               name={temp.name}
               templates={templates}
