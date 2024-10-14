@@ -16,6 +16,7 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import Step from "@/components/Step";
+import Image from "next/image";
 
 const otr = "outline outline-black";
 
@@ -108,34 +109,46 @@ const steps = [
 
 export default function Landing() {
   return (
-    <div className="bg-neutral-100 text-blue-950 transform-gpu overflow-x-hidden">
+    <div className="00 text-blue-950 transform-gpu overflow-x-hidden">
       {/* HEADER */}
       <header className="flex items-center justify-between w-full bg-[rgba(255,255,255,0.5)] backdrop-blur-[6px] py-4 px-16 mb-12  fixed top-0 z-50 border-b border-solid border-[rgba(255, 255, 255, 0.18)] max-md:px-4">
-        <p className="font-bold text-xl">CVly</p>
+        <Image
+          className="w-[100px] h-[35px] object-cover"
+          src="/assets/logo.png"
+          alt=""
+          width={100}
+          height={35}
+        />
         <nav className="flex items-center justify-between gap-6 ">
           <Link className="cursor-pointer" href={"/#faq"}>
             FAQ
           </Link>
 
           <Link className="cursor-pointer" href={"/create"}>
-            <Button>Get Started</Button>
+            <Button className="bg-transparent border border-solid border-blue-950 text-blue-950 hover:bg-blue-100">
+              Get Started
+            </Button>
           </Link>
         </nav>
       </header>
 
       {/* HERO SECTION */}
       <section
-        className={`relative flex items-center justify-between px-16 pt-16 max-md:py-32 max-md:px-8`}
+        className={`bg-neutral-100 relative flex items-center justify-between px-16 pt-16 max-md:py-48 max-md:px-8 rounded-br-[100px] overflow-hidden max-md:rounded-br-[80px]`}
       >
-        <img
+        <Image
           className="absolute object-contain w-[100%] -top-[40%] -left-[40%] z-10 opacity-40 max-md:top-0 animate-spin"
           src="/assets/hero-bg.svg"
-          alt=""
+          alt="gradient blur"
+          width={1500}
+          height={1500}
         />
-        <img
+        <Image
           className="absolute object-contain w-[100%] -top-[90%] -right-[40%] z-10 opacity-50 max-md:top-[50%] animate-spin delay-500"
           src="/assets/hero-bg.svg"
-          alt=""
+          alt="gradient blur"
+          width={1500}
+          height={1500}
         />
         <div
           className={`w-[50%] text-left -mt-20 z-20 max-md:mt-12 max-md:w-full max-md:text-center`}
@@ -155,17 +168,18 @@ export default function Landing() {
             </Button>
           </Link>
         </div>
-        <img
+        <Image
           className={` z-20 w-[50%] object-cover scale-110 mt-8 max-md:hidden`}
           src={"/assets/hero2.svg"}
-          alt=""
+          alt="Hero"
+          width={650}
+          height={650}
         />
       </section>
 
       {/* FEATURES */}
-      <main className="bg-blue-900 py-24 mb-24 relative">
-        <div className="triangle-1 max-md:hidden"></div>
-        <h1 className="text-center text-3xl font-bold mb-4 w-[50%] m-auto text-white max-md:w-[80%]">
+      <main className="z-20 bg-transparent py-24 mb-12 relative">
+        <h1 className="text-center text-3xl font-bold mb-4 w-[50%] m-auto text-white max-md:w-[80%] z-20 relative">
           Features designed to help you win your dream job
         </h1>
         <div className="h-[7px] m-auto rounded-xl bg-cyan-600 w-[50px] mb-12" />
@@ -179,71 +193,81 @@ export default function Landing() {
             />
           ))}
         </section>
-        <div className="triangle-2 max-md:hidden"></div>
       </main>
 
       {/* HOW IT WORKS */}
-      <h1 className="text-center text-3xl font-bold mb-2 w-[50%] m-auto max-md:w-[80%]">
-        Build Your Resume Fast and Easy
-      </h1>
-      <div className="h-[7px] m-auto rounded-xl bg-pink-600 w-[50px] mb-6" />
-      <p className=" text-center w-[70%] m-auto mb-24 text-lg">
-        CVly is lightning fast. There is no software to download. No multi-part
-        sign-up form. No long-winded tutorials. Just a straightforward process.
-      </p>
-      <section className="flex flex-col gap-4 w-[70%] m-auto mb-24 max-md:w-full">
-        {/* step 1 */}
-        {steps.map((step, i) => (
-          <Step
-            key={i}
-            description={step.description}
-            imgSrc={step.imgSrc}
-            stepNumber={i}
-            title={step.title}
-          />
-        ))}
+      <section className="bg-neutral-100 rounded-tl-[100px] pt-16 max-md:rounded-tl-[80px]">
+        <div>
+          <h1 className="text-center text-3xl font-bold mb-2 w-[50%] m-auto max-md:w-[80%]">
+            Build Your Resume Fast and Easy
+          </h1>
+          <div className="h-[7px] m-auto rounded-xl bg-pink-600 w-[50px] mb-6" />
+          <p className=" text-center w-[70%] m-auto mb-12 text-lg">
+            CVly is lightning fast. There is no software to download. No
+            multi-part sign-up form. No long-winded tutorials. Just a
+            straightforward process.
+          </p>
+        </div>
+        <main className="flex flex-col gap-4 w-[70%] m-auto  max-md:w-full">
+          {/* step 1 */}
+          {steps.map((step, i) => (
+            <Step
+              key={i}
+              description={step.description}
+              imgSrc={step.imgSrc}
+              stepNumber={i}
+              title={step.title}
+            />
+          ))}
+        </main>
       </section>
 
       {/* SECONDARY CALL TO ACTION */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-900 w-[90%] flex items-center justify-between m-auto rounded-xl px-16 shadow-lg mb-32 max-md:pt-8 max-md:px-2 max-md:flex-col max-md:gap-12">
-        <div className="flex flex-col max-md:items-center max-md:px-8">
-          <h1 className="text-3xl max-w-[70%] font-bold text-white mb-6 max-sm:max-w-full max-md:text-center max-md:mb-8">
-            Start building your resume today, land your dream job tomorrow
-          </h1>
-          <Link href={"/create"}>
-            <Button className="bg-white text-black font-bold text-md px-8 py-6 w-fit hover:bg-neutral-200 max-md:text-xl max-md:py-8">
-              Create my resume
-            </Button>
-          </Link>
-        </div>
-        <img
-          className="w-[350px] animate-float max-md:w-full"
-          src="/assets/document-stack.png"
-          alt=""
-        />
+      <section className="bg-neutral-100 pt-24 pb-32">
+        <main className="bg-gradient-to-r from-blue-600 to-blue-900 w-[90%] flex items-center justify-between m-auto rounded-xl px-16 shadow-lg max-md:pt-8 max-md:px-2 max-md:flex-col max-md:gap-12">
+          <div className="flex flex-col max-md:items-center max-md:px-8">
+            <h1 className="text-3xl max-w-[70%] font-bold text-white mb-6 max-sm:max-w-full max-md:text-center max-md:mb-8">
+              Start building your resume today, land your dream job tomorrow
+            </h1>
+            <Link href={"/create"}>
+              <Button className="bg-white text-black font-bold text-md px-8 py-6 w-fit hover:bg-neutral-200 max-md:text-xl max-md:py-8">
+                Create my resume
+              </Button>
+            </Link>
+          </div>
+          <Image
+            className="w-[350px] animate-float max-md:w-full"
+            src="/assets/document-stack.png"
+            alt="Document Stack"
+            width={350}
+            height={350}
+          />
+        </main>
       </section>
 
       {/* FAQ */}
-      <main
-        id="faq"
-        className="flex items-start justify-between m-auto w-[80%] mb-24 max-md:flex-col max-md:items-center"
-      >
-        <div>
-          <h1 className="text-left text-3xl font-bold mb-4 max-md:text-center">
-            Frequently asked questions
-          </h1>
-          <div className="h-[7px] mr-auto rounded-xl bg-cyan-600 w-[50px] mb-6 max-md:m-auto max-md:mb-8" />
-        </div>
-        <section className="flex flex-col w-[70%] gap-8 max-md:w-[90%]">
-          {faqs.map((faq, i) => (
-            <Accordion
-              description={faq.description}
-              title={faq.title}
-              key={i}
-            />
-          ))}
-        </section>
-      </main>
+      <section className="bg-neutral-100 pb-24">
+        <main
+          id="faq"
+          className="bg-neutral-100 flex items-start justify-between m-auto w-[80%] max-md:flex-col max-md:items-center"
+        >
+          <div>
+            <h1 className="text-left text-3xl font-bold mb-4 max-md:text-center">
+              Frequently asked questions
+            </h1>
+            <div className="h-[7px] mr-auto rounded-xl bg-cyan-600 w-[50px] mb-6 max-md:m-auto max-md:mb-8" />
+          </div>
+          <section className="flex flex-col w-[70%] gap-8 max-md:w-[90%]">
+            {faqs.map((faq, i) => (
+              <Accordion
+                description={faq.description}
+                title={faq.title}
+                key={i}
+              />
+            ))}
+          </section>
+        </main>
+      </section>
 
       {/* Footer */}
       <section className="bg-blue-950 text-white p-16 ">

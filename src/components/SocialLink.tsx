@@ -36,7 +36,7 @@ export default function SocialLinkComp({
   };
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex gap-4 items-center mb-12">
       <Input
         defaultValue={socialLink.title}
         placeholder="Title"
@@ -49,13 +49,13 @@ export default function SocialLinkComp({
         type="url"
         onChange={(e) => handleChange(e, "link")}
       />
-      <Button
+      {/* <Button
         className="max-md:px-0"
         variant="ghost"
         onClick={(e) => handleSocialLinkDelete(e)}
       >
         <RiDeleteBinLine className="text-red-600" size={22} />
-      </Button>
+      </Button> */}
     </div>
   );
 }

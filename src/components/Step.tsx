@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface StepProps {
@@ -27,7 +28,9 @@ export default function Step({
         <h1
           className={`${
             stepNumber % 2 != 0 ? "bg-cyan-600 " : "bg-pink-600"
-          } text-white rounded-md flex items-center justify-center text-5xl font-bold w-[96px] h-[96px]`}
+          } text-white rounded-md flex items-center justify-center text-5xl font-bold w-[96px] h-[96px] ${
+            stepNumber == 0 && "max-md:mt-6"
+          }`}
         >
           {stepNumber + 1}
         </h1>
@@ -36,7 +39,13 @@ export default function Step({
           <p>{description}</p>
         </div>
       </div>
-      <img className="w-[70%] max-md:w-full" src={imgSrc} alt="" />
+      <Image
+        className="w-[70%] max-md:w-full"
+        width={550}
+        height={550}
+        src={imgSrc}
+        alt=""
+      />
     </main>
   );
 }

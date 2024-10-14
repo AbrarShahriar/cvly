@@ -16,8 +16,8 @@ const payload = {
   socialLinks: [
     {
       id: "4aad9ab1-320c-4c6d-a748-462fa93b0379",
-      title: "Portfolio",
-      link: "",
+      title: "LinkedIn",
+      link: "https://linkedIn.com",
     },
   ],
   workExperiences: [
@@ -96,19 +96,7 @@ export default function Pdf() {
     >
       <div className="w-[100%]">
         <PDFViewer width={"100%"} height={"800"}>
-          {/* <Document>
-            <Page size="A4" style={tw(`p-6 pt-8 `)}>
-              <Html>{templates.toronto(payload)}</Html>
-            </Page>
-          </Document> */}
-          {loadTemplate("White House")(payload)}
-          {/* <Document>
-            <Page size={"A4"}>
-              {["A", "B", "C"].map((el) => (
-                <Text>{el}</Text>
-              ))}
-            </Page>
-          </Document> */}
+          {loadTemplate("Salem")(payload)}
         </PDFViewer>
       </div>
     </Suspense>

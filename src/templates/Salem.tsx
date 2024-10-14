@@ -15,42 +15,47 @@ import { parseDate, removePfromLi } from "@/lib/utils";
 
 const tw = createTw({});
 
-const primaryColor = "#ae624f";
+const primaryColor = "#2479b7";
 
-export const WhiteHouse = (payload: PdfPayloadType) => {
-  // Arimo
+export const Salem = (payload: PdfPayloadType) => {
   Font.register({
-    family: "Arimo",
-    src: "/fonts/Arimo/Arimo-Regular.ttf",
+    family: "Calibri",
+    src: "/fonts/Calibri/Calibri.ttf",
   });
   Font.register({
-    family: "ArimoBold",
-    src: "/fonts/Arimo/Arimo-Bold.ttf",
+    family: "CalibriBold",
+    src: "/fonts/Calibri/Calibri-Bold.ttf",
   });
   Font.register({
-    family: "ArimoItalic",
-    src: "/fonts/Arimo/Arimo-Italic.ttf",
+    family: "CalibriItalic",
+    src: "/fonts/Calibri/Calibri-Italic.ttf",
   });
+
   return (
     <Document>
       <Page
         size={"A4"}
-        style={tw(`p-8 pt-12 font-[Arimo] text-[10pt] leading-[1.15]`)}
+        style={tw(`p-16 font-[Calibri] text-[10pt] leading-[1.3]`)}
       >
         {/* Personal */}
-        <View style={tw(`flex-row items-center justify-between mb-6`)}>
-          <Text
-            style={tw(
-              `text-left text-[18pt] bg-[${primaryColor}] text-white py-6 pl-8 w-[50%] font-[ArimoBold]`
-            )}
-          >
-            {payload.firstName.toUpperCase()} {payload.lastName.toUpperCase()}
-          </Text>
-          <View style={tw(`flex text-right w-[50%]`)}>
-            <Text>{payload.location}</Text>
-            <Text>
-              {payload.email} | {payload.phone}
+        <View
+          style={tw(
+            `flex-row items-start justify-between mb-8 border-b border-neutral-700`
+          )}
+        >
+          <View style={tw(`flex text-[33pt]  w-[50%] leading-[1]`)}>
+            <Text style={tw(`font-[Calibri]`)}>
+              {payload.firstName.toUpperCase()}
             </Text>
+
+            <Text style={tw(`font-[CalibriBold]`)}>
+              {payload.lastName.toUpperCase()}
+            </Text>
+          </View>
+          <View style={tw(`flex text-right w-[50%] leading-[1.2]`)}>
+            <Text>{payload.location}</Text>
+            <Text>{payload.phone}</Text>
+            <Text>{payload.email}</Text>
             <Link
               style={tw(`text-[${primaryColor}]`)}
               src={payload.socialLinks[0].link}
@@ -60,18 +65,16 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
           </View>
         </View>
         <View style={tw(`px-2`)}>
-          <View style={tw("flex-row items-start justify-between mb-6")}>
-            <Text style={tw(`font-[ArimoBold] w-[20%] text-[${primaryColor}]`)}>
-              SUMMARY
-            </Text>
-            <Text style={tw("w-[80%]")}>
+          <View style={tw("flex items-start mb-8")}>
+            <Text style={tw(`font-[CalibriBold] text-[13pt]`)}>SUMMARY</Text>
+            <Text>
               <Html>
                 {`<style>
                 .bold, strong {
-                    font-family: "ArimoBold";
+                    font-family: "CalibriBold";
                     } 
                     .italic {
-                        font-family: "ArimoItalic";
+                        font-family: "CalibriItalic";
                         } 
                         p, span, ul, li {
                             font-size: 10pt;
@@ -87,35 +90,35 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
           </View>
 
           {/* Professional */}
-          <View style={tw("flex-row items-start justify-between mb-6")}>
-            <Text
-              style={tw(`flex font-[ArimoBold] w-[20%] text-[${primaryColor}]`)}
-            >
-              <Text>Professional</Text>
-              <Text>Experience</Text>
+          <View style={tw("flexitems-start")}>
+            <Text style={tw(`flex font-[CalibriBold] text-[13pt]`)}>
+              EXPERIENCE
             </Text>
-            <View style={tw("w-[80%]")}>
+            <View>
               {payload.workExperiences.map((el, i) => (
                 <View key={i}>
                   <Text
-                    style={tw(`font-[ArimoBold] text-[${primaryColor}] mb-2`)}
+                    style={tw(
+                      `flex-row items-center font-[CalibriBold] text-[13pt] justify-start`
+                    )}
                   >
-                    {el.position}
+                    <Text style={tw(`text-[${primaryColor}] mb-2`)}>
+                      {el.position}{" "}
+                    </Text>
+                    <Text>| {el.employer}</Text>
                   </Text>
-                  <Text style={tw(`font-[ArimoItalic]`)}>
-                    {el.employer}, {el.location}
-                  </Text>
-                  <Text style={tw("font-[ArimoItalic]")}>
-                    {parseDate(el.startDate)}-{parseDate(el.endDate)}
+                  <Text>
+                    {parseDate(el.startDate).toUpperCase()}-
+                    {parseDate(el.endDate).toUpperCase()}
                   </Text>
 
-                  <Html style={tw("-mt-2")}>
+                  <Html style={tw("-mt-4")}>
                     {`<style>
                 .bold, strong {
-                    font-family: "ArimoBold";
+                    font-family: "CalibriBold";
                 } 
                 .italic {
-                    font-family: "ArimoItalic";
+                    font-family: "CalibriItalic";
                 } 
                 p, span, ul, li {
                     font-size: 10pt;
@@ -137,36 +140,39 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
           </View>
 
           {/* Education */}
-
-          <View style={tw("flex-row items-start justify-between mb-6")}>
-            <Text style={tw(`font-[ArimoBold] w-[20%] text-[${primaryColor}]`)}>
+          <View style={tw("flexitems-start mb-8")}>
+            <Text style={tw(`flex font-[CalibriBold] text-[13pt]`)}>
               EDUCATION
             </Text>
-            <View style={tw("w-[80%]")}>
+            <View>
               {payload.educations.map((el, i) => (
                 <View key={i}>
-                  <Text style={tw(`font-[ArimoBold] text-[${primaryColor}]`)}>
-                    {el.degree}, {parseDate(el.endDate)}
+                  <Text
+                    style={tw(
+                      `flex-row items-center font-[CalibriBold] text-[13pt] justify-start`
+                    )}
+                  >
+                    <Text style={tw(`text-[${primaryColor}] mb-2`)}>
+                      {el.degree}{" "}
+                    </Text>
+                    <Text>| {el.school}</Text>
+                  </Text>
+                  <Text>
+                    {parseDate(el.startDate).toUpperCase()}-
+                    {parseDate(el.endDate).toUpperCase()}
                   </Text>
 
-                  <Html style={tw("-mt-4 -mb-4")}>
+                  <Html style={tw("-mt-4")}>
                     {`<style>
-
                 .bold, strong {
-                    font-family: "ArimoBold";
-                    } 
+                    font-family: "CalibriBold";
+                } 
                 .italic {
-                    font-family: "ArimoItalic";
+                    font-family: "CalibriItalic";
                 } 
                 p, span, ul, li {
                     font-size: 10pt;
                 }
-                p, span, li, ul, strong {
-                    font-family: "ArimoBold";
-                    font-size: 10pt;
-                    color: ${primaryColor};
-                }
-                
                 li {
                     margin-bottom: 5px;
                     margin-left: -20px;
@@ -178,9 +184,6 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                 )}
                 `}
                   </Html>
-                  <Text style={tw(`font-[ArimoItalic]`)}>
-                    {el.school}, {el.location}
-                  </Text>
                 </View>
               ))}
             </View>

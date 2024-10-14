@@ -4,7 +4,9 @@ import { TemplateNames } from "@/lib/templates";
 import { TemplateType } from "@/types";
 import React from "react";
 import { MdDone } from "react-icons/md";
-import { generatePdf } from "./pageGenerate";
+import { generatePdf } from "../lib/pageGenerate";
+import Image from "next/image";
+import { sendGAEvent } from "@next/third-parties/google";
 
 interface TemplateProps {
   name: TemplateNames;
@@ -25,7 +27,6 @@ export default function Template({
 }: TemplateProps) {
   const handleSelected = () => {
     const data = [...templates];
-
     for (let i = 0; i < data.length; i++) {
       if (data[i].name == name) {
         data[i].selected = !defaultSelected;
@@ -39,6 +40,7 @@ export default function Template({
         data[i].selected = false;
       }
     }
+    sendGAEvent({ event: "SELECTED_TEMPLATE", value: name });
 
     setTemplates(data);
   };
@@ -50,12 +52,14 @@ export default function Template({
     >
       <p className=" text-center font-semibold mb-1">{name}</p>
       <div className="relative">
-        <img
+        <Image
           className={`rounded-lg w-48 h-64 object-cover border-4 border-solid transition-all shadow-md  hover:border-blue-500 ${
             defaultSelected ? "border-blue-500" : "border-transparent"
           }`}
           src={img}
           alt={name}
+          width={192}
+          height={256}
         />
         <div
           className={`absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] text-white bg-blue-500 rounded-full transition-opacity p-3 ${

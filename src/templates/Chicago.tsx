@@ -1,5 +1,12 @@
 import { PdfPayloadType } from "@/types";
-import { Document, Text, View, Page } from "@react-pdf/renderer";
+import {
+  Document,
+  Text,
+  View,
+  Page,
+  Link,
+  Font,
+} from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import Html from "react-pdf-html";
 import { createTw } from "react-pdf-tailwind";
 import ReactDOMServer from "react-dom/server";
@@ -8,7 +15,21 @@ import { parseDate, removePfromLi } from "@/lib/utils";
 
 const tw = createTw({});
 
+const primaryColor = "#1d3b62";
+
 export const Chicago = (payload: PdfPayloadType) => {
+  Font.register({
+    family: "Lora",
+    src: "/fonts/Lora/Lora-Regular.ttf",
+  });
+  Font.register({
+    family: "LoraBold",
+    src: "/fonts/Lora/Lora-Bold.ttf",
+  });
+  Font.register({
+    family: "LoraItalic",
+    src: "/fonts/Lora/Lora-Italic.ttf",
+  });
   console.log("Instantiating Chicago");
 
   return (
@@ -17,7 +38,7 @@ export const Chicago = (payload: PdfPayloadType) => {
         <View>
           <Text
             style={tw(
-              `text-center text-[24pt] border-b border-solid border-black text-[#1d3b62] font-[LoraBold]`
+              `text-center text-[24pt] border-b border-solid border-black text-[${primaryColor}] font-[LoraBold]`
             )}
           >
             {payload.firstName} {payload.lastName}
@@ -29,8 +50,15 @@ export const Chicago = (payload: PdfPayloadType) => {
           )}
         >
           <Text>{payload.location}</Text>
-          <Text>{payload.phone}</Text>
-          <Text>{payload.email}</Text>
+          <Text>
+            {payload.email} | {payload.phone}
+          </Text>
+          <Link
+            style={tw(`text-[${primaryColor}]`)}
+            src={payload.socialLinks[0].link}
+          >
+            {payload.socialLinks[0].title}
+          </Link>
         </View>
         <View style={tw(" -mt-2 text-center px-2")}>
           <Html>
@@ -55,7 +83,7 @@ export const Chicago = (payload: PdfPayloadType) => {
 
         <Text
           style={tw(
-            "font-[LoraBold] border-b border-solid border-black text-[12pt] pl-2 text-[#1d3b62] mb-4"
+            `font-[LoraBold] border-b border-solid border-black text-[12pt] pl-2 text-[${primaryColor}] mb-4`
           )}
         >
           PROFESSIONAL EXPERIENCE
@@ -104,7 +132,7 @@ export const Chicago = (payload: PdfPayloadType) => {
         <View>
           <Text
             style={tw(
-              "font-[LoraBold] border-b border-solid border-black text-[12pt] pl-1 text-[#1d3b62] mb-4"
+              `font-[LoraBold] border-b border-solid border-black text-[12pt] pl-1 text-[${primaryColor}] mb-4`
             )}
           >
             EDUCATION

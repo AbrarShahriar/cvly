@@ -181,12 +181,15 @@ export default function Info() {
 
         {/* SOCIAL LINKS */}
         <h2 className="text-2xl font-bold text-slate-800 mt-10 mb-2">
-          Social Links (Work In Progress)
+          Social Link
         </h2>
         <p className="text-sm opacity-80 w-[70%] mb-6">
-          Include links to your professional social media profiles, such as
+          {/* Include links to your professional social media profiles, such as
           LinkedIn, GitHub, or personal websites, to showcase your work and
-          online presence.
+          online presence. */}
+          Include a link to your most active work related social media profile.
+          If you are active on LinkedIn, then preferably add LinkedIn. If you
+          are a developer not much active on LinkedIn, then add GitHub.
         </p>
         <div className="flex flex-col gap-4 mb-4">
           {socialLinks.map((socialLink) => (
@@ -198,12 +201,12 @@ export default function Info() {
             />
           ))}
         </div>
-        <p
+        {/* <p
           className="flex gap-1 cursor-pointer text-blue-500 items-center font-bold text-sm  hover:bg-blue-100 p-3 rounded-md mb-12"
           onClick={(e) => handleAddSocialLink(e)}
         >
           <LuPlus strokeWidth={3} size={16} /> Add another link
-        </p>
+        </p> */}
 
         {/* WORK EXPERIENCE */}
         <h1 className="text-3xl font-bold text-slate-800 mb-2">

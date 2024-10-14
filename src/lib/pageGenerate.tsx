@@ -64,34 +64,6 @@ const payload = {
 };
 
 function load() {
-  // Lora
-  Font.register({
-    family: "Lora",
-    src: "/fonts/Lora/Lora-Regular.ttf",
-  });
-  Font.register({
-    family: "LoraBold",
-    src: "/fonts/Lora/Lora-Bold.ttf",
-  });
-  Font.register({
-    family: "LoraItalic",
-    src: "/fonts/Lora/Lora-Italic.ttf",
-  });
-
-  // Arimo
-  Font.register({
-    family: "Arimo",
-    src: "/fonts/Arimo/Arimo-Regular.ttf",
-  });
-  Font.register({
-    family: "ArimoBold",
-    src: "/fonts/Arimo/Arimo-Bold.ttf",
-  });
-  Font.register({
-    family: "ArimoItalic",
-    src: "/fonts/Arimo/Arimo-Italic.ttf",
-  });
-
   Font.registerHyphenationCallback((word) => [word]);
 }
 

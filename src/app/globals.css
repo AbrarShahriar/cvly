@@ -1,5 +1,3 @@
-@import "../../public/fonts/fonts.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -114,7 +112,7 @@ li > p {
   display: block;
   height: 100%;
   border-radius: 0 0 0 50%;
-  box-shadow: 0 0 0 150px #1e3a8a;
+  box-shadow: 0 0 0 150px transparent;
 }
 .triangle-2 {
   height: 150px;
@@ -129,5 +127,5 @@ li > p {
   display: block;
   height: 100%;
   border-radius: 0 50% 0 0;
-  box-shadow: 0 0 0 150px #1e3a8a;
+  box-shadow: 0 0 0 150px transparent;
 }
