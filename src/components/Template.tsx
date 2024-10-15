@@ -4,9 +4,7 @@ import { TemplateNames } from "@/lib/templates";
 import { TemplateType } from "@/types";
 import React from "react";
 import { MdDone } from "react-icons/md";
-import { generatePdf } from "../lib/pageGenerate";
 import Image from "next/image";
-import { sendGAEvent } from "@next/third-parties/google";
 
 interface TemplateProps {
   name: TemplateNames;
@@ -31,16 +29,10 @@ export default function Template({
       if (data[i].name == name) {
         data[i].selected = !defaultSelected;
         console.log("Setting template to", name);
-
-        const payload = JSON.parse(
-          localStorage.getItem("resume-draft") as string
-        );
-        updateInstance(generatePdf({ payload, selectedTemplate: name }));
       } else {
         data[i].selected = false;
       }
     }
-    sendGAEvent({ event: "SELECTED_TEMPLATE", value: name });
 
     setTemplates(data);
   };

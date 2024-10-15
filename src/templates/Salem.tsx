@@ -12,6 +12,7 @@ import { createTw } from "react-pdf-tailwind";
 import ReactDOMServer from "react-dom/server";
 import parse from "html-react-parser";
 import { parseDate, removePfromLi } from "@/lib/utils";
+import { TIME_PRESENT } from "@/components/ui/datetimepicker";
 
 const tw = createTw({});
 
@@ -109,7 +110,9 @@ export const Salem = (payload: PdfPayloadType) => {
                   </Text>
                   <Text>
                     {parseDate(el.startDate).toUpperCase()}-
-                    {parseDate(el.endDate).toUpperCase()}
+                    {el.endDate == TIME_PRESENT.toDateString()
+                      ? "Present"
+                      : parseDate(el.endDate).toUpperCase()}
                   </Text>
 
                   <Html style={tw("-mt-4")}>
@@ -159,7 +162,9 @@ export const Salem = (payload: PdfPayloadType) => {
                   </Text>
                   <Text>
                     {parseDate(el.startDate).toUpperCase()}-
-                    {parseDate(el.endDate).toUpperCase()}
+                    {el.endDate == TIME_PRESENT.toDateString()
+                      ? "Present"
+                      : parseDate(el.endDate).toUpperCase()}
                   </Text>
 
                   <Html style={tw("-mt-4")}>

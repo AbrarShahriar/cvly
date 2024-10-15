@@ -6,6 +6,7 @@ import ReactDOMServer from "react-dom/server";
 import parse from "html-react-parser";
 import { parseDate, removePfromLi } from "@/lib/utils";
 import { Font } from "@react-pdf/renderer/lib/react-pdf.browser.min";
+import { TIME_PRESENT } from "@/components/ui/datetimepicker";
 
 const tw = createTw({});
 
@@ -98,7 +99,9 @@ export const Budapest = (payload: PdfPayloadType) => {
                 <View key={i}>
                   <Text>
                     {parseDate(el.startDate).toUpperCase()}–
-                    {parseDate(el.endDate).toUpperCase()}
+                    {el.endDate == TIME_PRESENT.toDateString()
+                      ? "Present"
+                      : parseDate(el.endDate).toUpperCase()}
                   </Text>
                   <Text style={tw(`font-[CalibriBold] text-[${textColor}]`)}>
                     {el.position} | {el.employer} | {el.location}
@@ -148,7 +151,9 @@ export const Budapest = (payload: PdfPayloadType) => {
                 <View key={i}>
                   <Text style={tw(`text-[${secondaryTextColor}]`)}>
                     {parseDate(el.startDate).toUpperCase()}-
-                    {parseDate(el.endDate).toUpperCase()}
+                    {el.endDate == TIME_PRESENT.toDateString()
+                      ? "Present"
+                      : parseDate(el.endDate).toUpperCase()}
                   </Text>
                   <Text style={tw(`font-[CalibriBold] text-[${textColor}]`)}>
                     {el.degree} | {el.school} | {el.location}

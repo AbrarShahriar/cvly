@@ -6,7 +6,7 @@ import { Label } from "./label";
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-const InputShadcn = React.forwardRef<HTMLInputElement, InputProps>(
+export const InputShadcn = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
       <input
@@ -29,6 +29,7 @@ interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   placeholder?: string;
   value?: string;
+  ref?: React.LegacyRef<HTMLInputElement>;
 }
 
 const Input = ({
@@ -37,6 +38,7 @@ const Input = ({
   placeholder,
   label,
   value,
+  ref,
   ...props
 }: CustomInputProps) => {
   const data = label ? label.split(" ").join("") : "";
@@ -44,6 +46,7 @@ const Input = ({
     <div className="grid w-full items-center gap-1.5">
       <Label htmlFor={data}>{label}</Label>
       <InputShadcn
+        ref={ref}
         className={className}
         type={type || "text"}
         id={data}

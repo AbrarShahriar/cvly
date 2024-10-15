@@ -14,6 +14,8 @@ import { ScrollArea } from "../ui/scroll-area";
 import Image from "next/image";
 
 import { CustomDialog, DialogContent } from "../CustomDialog";
+import { TemplateNames } from "@/lib/templates";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const date = new Date();
 
@@ -56,7 +58,7 @@ export default function Templates() {
     "Fetching the fonts and styles...",
     "Injecting your information into the template...",
     "Rendering your resume...",
-    "Download will begin shortly...",
+    "Download will begin shortly... Try again if download does not start",
   ];
 
   const handleGenerate = () => {
@@ -70,6 +72,15 @@ export default function Templates() {
       return setOpenNoThemeModal(true);
     }
 
+    const payload = JSON.parse(localStorage.getItem("resume-draft") as string);
+
+    let selectedTemplate: TemplateNames = "Chicago";
+    templates.forEach((template) => {
+      if (template.selected) {
+        selectedTemplate = template.name;
+      }
+    });
+    updateInstance(generatePdf({ payload, selectedTemplate }));
     setOpenGeneratingBackdrop(true);
 
     const timeout = setTimeout(() => {
@@ -82,6 +93,7 @@ export default function Templates() {
       link.remove();
       setOpenGeneratingBackdrop(false);
       clearTimeout(timeout);
+      sendGAEvent("event", "SELECTED_TEMPLATE", { value: selectedTemplate });
     }, 2000);
   };
 

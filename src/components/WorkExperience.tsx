@@ -8,12 +8,17 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
-import { DatePicker } from "./ui/datepicker";
+// import { DatePicker } from "./ui/datepicker";
 import { WorkExperienceType } from "@/types";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { parseDate } from "@/lib/utils";
+import { DateTimePicker } from "./ui/datetimepicker";
+import type { MaskitoOptions } from "@maskito/core";
+import { useMaskito } from "@maskito/react";
+import { maskitoDateOptionsGenerator } from "@maskito/kit";
+import { DatePicker } from "@nextui-org/date-picker";
 
 interface WorkExperienceProps {
   workExperience: WorkExperienceType;
@@ -86,20 +91,16 @@ export default function WorkExperience({
                 Start & End Date
               </Label>
               <div className="flex gap-4 w-full items-end justify-between max-md:flex-col">
-                <DatePicker
-                  date={new Date(workExperience.startDate)}
+                <DateTimePicker
+                  granularity="day"
+                  value={new Date(workExperience.startDate)}
                   callback={(date) => handleChange(date, "startDate")}
                 />
-                <DatePicker
-                  date={
-                    workExperience.endDate == "Present"
-                      ? "Present"
-                      : new Date(workExperience.endDate)
-                  }
-                  disabler
-                  disablerLabel="Present"
+                <DateTimePicker
+                  showPresentCheckbox={true}
+                  granularity="day"
+                  value={new Date(workExperience.endDate)}
                   callback={(date) => handleChange(date, "endDate")}
-                  disablerDefault={false}
                 />
               </div>
             </div>

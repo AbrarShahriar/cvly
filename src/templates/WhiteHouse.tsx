@@ -12,6 +12,7 @@ import { createTw } from "react-pdf-tailwind";
 import ReactDOMServer from "react-dom/server";
 import parse from "html-react-parser";
 import { parseDate, removePfromLi } from "@/lib/utils";
+import { TIME_PRESENT } from "@/components/ui/datetimepicker";
 
 const tw = createTw({});
 
@@ -106,7 +107,10 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                     {el.employer}, {el.location}
                   </Text>
                   <Text style={tw("font-[ArimoItalic]")}>
-                    {parseDate(el.startDate)}-{parseDate(el.endDate)}
+                    {parseDate(el.startDate)}-
+                    {el.endDate == TIME_PRESENT.toDateString()
+                      ? "Present"
+                      : parseDate(el.endDate).toUpperCase()}
                   </Text>
 
                   <Html style={tw("-mt-2")}>
@@ -146,7 +150,10 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
               {payload.educations.map((el, i) => (
                 <View key={i}>
                   <Text style={tw(`font-[ArimoBold] text-[${primaryColor}]`)}>
-                    {el.degree}, {parseDate(el.endDate)}
+                    {el.degree},{" "}
+                    {el.endDate == TIME_PRESENT.toDateString()
+                      ? "Present"
+                      : parseDate(el.endDate).toUpperCase()}
                   </Text>
 
                   <Html style={tw("-mt-4 -mb-4")}>

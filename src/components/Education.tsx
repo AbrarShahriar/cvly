@@ -8,12 +8,12 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
-import { DatePicker } from "./ui/datepicker";
 import { EducationType, WorkExperienceType } from "@/types";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { parseDate } from "@/lib/utils";
+import { DateTimePicker } from "./ui/datetimepicker";
 
 interface WorkExperienceProps {
   education: EducationType;
@@ -82,21 +82,16 @@ export default function Education({
                 Start & End Date
               </Label>
               <div className="flex gap-4 w-full items-end justify-between max-md:flex-col">
-                <DatePicker
-                  date={new Date(education.startDate)}
-                  onChange={(e) => handleChange(e, "startDate")}
+                <DateTimePicker
+                  granularity="day"
+                  value={new Date(education.startDate)}
                   callback={(date) => handleChange(date, "startDate")}
                 />
-                <DatePicker
-                  date={
-                    education.endDate == "Present"
-                      ? "Present"
-                      : new Date(education.endDate)
-                  }
+                <DateTimePicker
+                  showPresentCheckbox={true}
+                  granularity="day"
+                  value={new Date(education.endDate)}
                   callback={(date) => handleChange(date, "endDate")}
-                  disabler
-                  disablerLabel="Present"
-                  disablerDefault={false}
                 />
               </div>
             </div>

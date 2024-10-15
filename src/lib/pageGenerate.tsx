@@ -76,10 +76,10 @@ export const generatePdf = ({
 }) => {
   load();
 
-  console.log("generating...", payload);
+  // console.log("generating...", payload);
 
   if (!payload) {
-    console.log("no payload");
+    // console.log("no payload");
 
     return (
       <Document>
