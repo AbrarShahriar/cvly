@@ -83,6 +83,8 @@ export default function Templates() {
     updateInstance(generatePdf({ payload, selectedTemplate }));
     setOpenGeneratingBackdrop(true);
 
+    (window as any).beam(`/selected_template/${selectedTemplate}`);
+
     const timeout = setTimeout(() => {
       const url = instance.url as string;
       const link = document.createElement("a");
