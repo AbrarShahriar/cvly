@@ -16,6 +16,7 @@ import Image from "next/image";
 import { CustomDialog, DialogContent } from "../CustomDialog";
 import { TemplateNames } from "@/lib/templates";
 import { sendGAEvent } from "@next/third-parties/google";
+import DownloadLoader from "../DownloadLoader";
 
 const date = new Date();
 
@@ -85,7 +86,7 @@ export default function Templates() {
     updateInstance(generatePdf({ payload, selectedTemplate }));
     setOpenGeneratingBackdrop(true);
 
-    (window as any).beam(`/selected_template/${selectedTemplate}`);
+    // (window as any).beam(`/selected_template/${selectedTemplate}`);
 
     const timeout = setTimeout(() => {
       const url = instance.url as string;
@@ -98,7 +99,7 @@ export default function Templates() {
       setOpenGeneratingBackdrop(false);
       clearTimeout(timeout);
       sendGAEvent("event", "SELECTED_TEMPLATE", { value: selectedTemplate });
-    }, 2000);
+    }, 14000);
   };
 
   return (
@@ -193,12 +194,14 @@ export default function Templates() {
       <CustomDialog open={openGeneratingBackdrop}>
         <DialogContent className="sm:max-w-[425px] grid place-items-center rounded-lg">
           <Image
+            priority
             alt="loading"
             src="/assets/loader.gif"
             width={100}
             height={100}
           />
-          <p className="text-center">{loadingStateTexts[4]}</p>
+          {/* <p className="text-center">{loadingStateTexts[4]}</p> */}
+          <DownloadLoader />
         </DialogContent>
       </CustomDialog>
     </div>

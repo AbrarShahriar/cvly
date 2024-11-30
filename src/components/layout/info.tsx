@@ -20,43 +20,69 @@ import { Button } from "../ui/button";
 import AlertBox from "../AlertBox";
 
 export default function Info() {
+  const [defaultPayload, setDefaultPayload] = useState<PdfPayloadType>(
+    JSON.parse(localStorage.getItem("resume-draft") as string)
+  );
+
   const [isDraftSaved, setIsDraftSaved] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [location, setLocation] = useState("");
-  const [summary, setSummary] = useState("");
-  const [socialLinks, setSocialLinks] = useState<SocialLink[]>([
-    {
-      id: uuidv4(),
-      title: "",
-      link: "",
-    },
-  ]);
-  const [workExperiences, setWorkExperiences] = useState<WorkExperienceType[]>([
-    {
-      id: uuidv4(),
-      position: "",
-      employer: "",
-      location: "",
-      description: ``,
-      startDate: new Date().toDateString(),
-      endDate: new Date().toDateString(),
-    },
-  ]);
-  const [educations, setEducations] = useState<EducationType[]>([
-    {
-      id: uuidv4(),
-      school: "",
-      degree: "",
-      location: "",
-      description: "",
-      startDate: new Date().toDateString(),
-      endDate: new Date().toDateString(),
-    },
-  ]);
-  const [additional, setAdditional] = useState("");
+  const [firstName, setFirstName] = useState<string>(
+    defaultPayload && defaultPayload.firstName
+  );
+  const [lastName, setLastName] = useState<string>(
+    defaultPayload && defaultPayload.lastName
+  );
+  const [email, setEmail] = useState(defaultPayload && defaultPayload.email);
+  const [phone, setPhone] = useState(defaultPayload && defaultPayload.phone);
+  const [location, setLocation] = useState(
+    defaultPayload && defaultPayload.location
+  );
+  const [summary, setSummary] = useState(
+    defaultPayload && defaultPayload.summary
+  );
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>(
+    defaultPayload
+      ? defaultPayload.socialLinks
+      : [
+          {
+            id: uuidv4(),
+            title: "",
+            link: "",
+          },
+        ]
+  );
+  const [workExperiences, setWorkExperiences] = useState<WorkExperienceType[]>(
+    defaultPayload
+      ? defaultPayload.workExperiences
+      : [
+          {
+            id: uuidv4(),
+            position: "",
+            employer: "",
+            location: "",
+            description: ``,
+            startDate: new Date().toDateString(),
+            endDate: new Date().toDateString(),
+          },
+        ]
+  );
+  const [educations, setEducations] = useState<EducationType[]>(
+    defaultPayload
+      ? defaultPayload.educations
+      : [
+          {
+            id: uuidv4(),
+            school: "",
+            degree: "",
+            location: "",
+            description: "",
+            startDate: new Date().toDateString(),
+            endDate: new Date().toDateString(),
+          },
+        ]
+  );
+  const [additional, setAdditional] = useState(
+    defaultPayload && defaultPayload.additional
+  );
 
   const handleAddSocialLink = (e: any) => {
     e.preventDefault();

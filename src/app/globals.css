@@ -129,3 +129,81 @@ li > p {
   border-radius: 0 50% 0 0;
   box-shadow: 0 0 0 150px transparent;
 }
+
+/* Container for steps */
+.loading-steps {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  height: 20px; /* Matches the height of one step */
+  width: 100%; /* Optional */
+  overflow: hidden; /* Ensure no overflow */
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Individual steps */
+.step {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  opacity: 0; /* Hidden by default */
+  transform: translateY(10px); /* Start slightly below view */
+  animation: stepFade 10s linear 1;
+  animation-fill-mode: forwards; /* Maintain the final state */
+}
+
+/* Assign delays for each step */
+.step:nth-child(1) {
+  animation-delay: 0s; /* First step appears immediately */
+}
+.step:nth-child(2) {
+  animation-delay: 2s; /* Second step appears after 2s */
+}
+.step:nth-child(3) {
+  animation-delay: 4s; /* Third step appears after 4s */
+}
+.step:nth-child(4) {
+  animation-delay: 6s; /* Last step appears after 6s */
+}
+
+/* Keyframes for step visibility */
+@keyframes stepFade {
+  0%,
+  19% {
+    opacity: 0;
+    transform: translateY(10px); /* Hidden below view */
+  }
+  20%,
+  39% {
+    opacity: 1;
+    transform: translateY(0); /* Fully visible */
+  }
+  40%,
+  100% {
+    opacity: 0;
+    transform: translateY(-10px); /* Hidden above view */
+  }
+}
+
+/* Last step special behavior (stays visible) */
+.step:last-child {
+  animation: finalStep 13.5s linear 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes finalStep {
+  0%,
+  74% {
+    opacity: 0;
+    transform: translateY(10px); /* Hidden below */
+  }
+  75%,
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Fully visible and stays */
+  }
+}
