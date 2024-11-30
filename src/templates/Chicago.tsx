@@ -82,79 +82,29 @@ export const Chicago = (payload: PdfPayloadType) => {
           </Html>
         </View>
 
-        <Text
-          style={tw(
-            `font-[LoraBold] border-b border-solid border-black text-[12pt] pl-2 text-[${primaryColor}] mb-4`
-          )}
-        >
-          PROFESSIONAL EXPERIENCE
-        </Text>
-
-        <View style={tw("px-2")}>
-          {payload.workExperiences.map((el, i) => (
-            <View key={i} style={tw("mb-2")}>
-              <View
-                style={tw(
-                  "flex-row items-center justify-between font-[LoraBold]"
-                )}
-              >
-                <Text>{el.employer.toUpperCase()}</Text>
-                <Text>{el.location}</Text>
-              </View>
-              <View style={tw("flex-row items-center justify-between")}>
-                <Text>{el.position}</Text>
-                <Text style={tw("font-[LoraItalic]")}>
-                  {parseDate(el.startDate)}-
-                  {el.endDate == TIME_PRESENT.toDateString()
-                    ? "Present"
-                    : parseDate(el.endDate).toUpperCase()}
-                </Text>
-              </View>
-
-              <Html style={tw("-mt-4")}>
-                {`<style>
-                .bold, strong {
-                    font-family: "LoraBold";
-                } 
-                .italic {
-                    font-family: "LoraItalic";
-                } 
-                p, span, ul, li {
-                    font-size: 11pt;
-                }
-          </style>
-          
-          ${ReactDOMServer.renderToStaticMarkup(
-            parse(removePfromLi(el.description))
-          )}
-          `}
-              </Html>
-            </View>
-          ))}
-        </View>
-
-        <View>
+        {/* Professional */}
+        <View style={tw("mb-4")}>
           <Text
             style={tw(
-              `font-[LoraBold] border-b border-solid border-black text-[12pt] pl-1 text-[${primaryColor}] mb-4`
+              `font-[LoraBold] border-b border-solid border-black text-[12pt] pl-2 text-[${primaryColor}] mb-4`
             )}
           >
-            EDUCATION
+            PROFESSIONAL EXPERIENCE
           </Text>
 
           <View style={tw("px-2")}>
-            {payload.educations.map((el, i) => (
-              <View key={i} style={tw("mb-2")}>
+            {payload.workExperiences.map((el, i) => (
+              <View key={i} style={tw("mb-6")}>
                 <View
                   style={tw(
                     "flex-row items-center justify-between font-[LoraBold]"
                   )}
                 >
-                  <Text>{el.school.toUpperCase()}</Text>
+                  <Text>{el.employer.toUpperCase()}</Text>
                   <Text>{el.location}</Text>
                 </View>
-                <View style={tw("flex-row items-center justify-between")}>
-                  <Text>{el.degree}</Text>
+                <View style={tw("flex-row items-center justify-between mb-4")}>
+                  <Text>{el.position}</Text>
                   <Text style={tw("font-[LoraItalic]")}>
                     {parseDate(el.startDate)}-
                     {el.endDate == TIME_PRESENT.toDateString()
@@ -162,8 +112,13 @@ export const Chicago = (payload: PdfPayloadType) => {
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
                 </View>
-                <Html style={tw("-mt-4")}>
+
+                <Html>
                   {`<style>
+                * {
+              margin: 0;
+              padding:0;
+              }
                 .bold, strong {
                     font-family: "LoraBold";
                 } 
@@ -182,6 +137,99 @@ export const Chicago = (payload: PdfPayloadType) => {
                 </Html>
               </View>
             ))}
+          </View>
+        </View>
+
+        {/* Education */}
+        <View style={tw("mb-4")}>
+          <Text
+            style={tw(
+              `font-[LoraBold] border-b border-solid border-black text-[12pt] pl-1 text-[${primaryColor}] mb-4`
+            )}
+          >
+            EDUCATION
+          </Text>
+
+          <View style={tw("px-2")}>
+            {payload.educations.map((el, i) => (
+              <View key={i} style={tw("mb-4")}>
+                <View
+                  style={tw(
+                    "flex-row items-center justify-between font-[LoraBold]"
+                  )}
+                >
+                  <Text>{el.school.toUpperCase()}</Text>
+                  <Text>{el.location}</Text>
+                </View>
+                <View style={tw("flex-row items-center justify-between mb-2")}>
+                  <Text>{el.degree}</Text>
+                  <Text style={tw("font-[LoraItalic]")}>
+                    {parseDate(el.startDate)}-
+                    {el.endDate == TIME_PRESENT.toDateString()
+                      ? "Present"
+                      : parseDate(el.endDate).toUpperCase()}
+                  </Text>
+                </View>
+                <Html>
+                  {`<style>
+                  * {
+              margin: 0;
+              padding:0;
+              }
+                .bold, strong {
+                    font-family: "LoraBold";
+                } 
+                .italic {
+                    font-family: "LoraItalic";
+                } 
+                p, span, ul, li {
+                    font-size: 11pt;
+                }
+          </style>
+          
+          ${ReactDOMServer.renderToStaticMarkup(
+            parse(removePfromLi(el.description))
+          )}
+          `}
+                </Html>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Additional */}
+        <View>
+          <Text
+            style={tw(
+              `font-[LoraBold] border-b border-solid border-black text-[12pt] pl-1 text-[${primaryColor}] mb-4`
+            )}
+          >
+            ADDITIONAL INFORMATION
+          </Text>
+
+          <View style={tw("px-2")}>
+            <Html>
+              {`<style>
+              * {
+              margin: 0;
+              padding:0;
+              }
+                .bold, strong {
+                    font-family: "LoraBold";
+                } 
+                .italic {
+                    font-family: "LoraItalic";
+                } 
+                p, span, ul, li {
+                    font-size: 11pt;
+                }
+          </style>
+          
+          ${ReactDOMServer.renderToStaticMarkup(
+            parse(removePfromLi(payload.additional))
+          )}
+          `}
+            </Html>
           </View>
         </View>
       </Page>

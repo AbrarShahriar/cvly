@@ -91,13 +91,13 @@ export const Salem = (payload: PdfPayloadType) => {
           </View>
 
           {/* Professional */}
-          <View style={tw("flexitems-start")}>
-            <Text style={tw(`flex font-[CalibriBold] text-[13pt]`)}>
+          <View style={tw("flexitems-start mb-6")}>
+            <Text style={tw(`flex font-[CalibriBold] text-[13pt] mb-2`)}>
               EXPERIENCE
             </Text>
             <View>
               {payload.workExperiences.map((el, i) => (
-                <View key={i}>
+                <View key={i} style={tw("mb-4")}>
                   <Text
                     style={tw(
                       `flex-row items-center font-[CalibriBold] text-[13pt] justify-start`
@@ -115,8 +115,12 @@ export const Salem = (payload: PdfPayloadType) => {
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
 
-                  <Html style={tw("-mt-4")}>
+                  <Html>
                     {`<style>
+                    * {
+                  margin: 0;
+                  padding: 0;
+                }
                 .bold, strong {
                     font-family: "CalibriBold";
                 } 
@@ -143,8 +147,8 @@ export const Salem = (payload: PdfPayloadType) => {
           </View>
 
           {/* Education */}
-          <View style={tw("flexitems-start mb-8")}>
-            <Text style={tw(`flex font-[CalibriBold] text-[13pt]`)}>
+          <View style={tw("flexitems-start mb-6")}>
+            <Text style={tw(`flex font-[CalibriBold] text-[13pt] mb-2`)}>
               EDUCATION
             </Text>
             <View>
@@ -167,8 +171,12 @@ export const Salem = (payload: PdfPayloadType) => {
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
 
-                  <Html style={tw("-mt-4")}>
+                  <Html>
                     {`<style>
+                    * {
+                  margin: 0;
+                  padding: 0;
+                }
                 .bold, strong {
                     font-family: "CalibriBold";
                 } 
@@ -191,6 +199,41 @@ export const Salem = (payload: PdfPayloadType) => {
                   </Html>
                 </View>
               ))}
+            </View>
+          </View>
+
+          {/* Additional */}
+          <View style={tw("flexitems-start mb-8")}>
+            <Text style={tw(`flex font-[CalibriBold] text-[13pt]`)}>
+              ADDITIONAL
+            </Text>
+            <View>
+              <Html>
+                {`<style>
+                * {
+                  margin: 0;
+                  padding: 0;
+                }
+                .bold, strong {
+                    font-family: "CalibriBold";
+                } 
+                .italic {
+                    font-family: "CalibriItalic";
+                } 
+                p, span, ul, li {
+                    font-size: 10pt;
+                }
+                li {
+                    margin-bottom: 5px;
+                    margin-left: -20px;
+                }
+          </style>
+          
+                ${ReactDOMServer.renderToStaticMarkup(
+                  parse(removePfromLi(payload.additional))
+                )}
+                `}
+              </Html>
             </View>
           </View>
         </View>

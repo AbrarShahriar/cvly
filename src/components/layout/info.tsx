@@ -6,7 +6,12 @@ import Tiptap from "@/components/Tiptap";
 
 import { Input } from "@/components/ui/input";
 import WorkExperience from "@/components/WorkExperience";
-import { EducationType, SocialLink, WorkExperienceType } from "@/types";
+import {
+  EducationType,
+  PdfPayloadType,
+  SocialLink,
+  WorkExperienceType,
+} from "@/types";
 import { useEffect, useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import { FaRegSave } from "react-icons/fa";
@@ -51,6 +56,7 @@ export default function Info() {
       endDate: new Date().toDateString(),
     },
   ]);
+  const [additional, setAdditional] = useState("");
 
   const handleAddSocialLink = (e: any) => {
     e.preventDefault();
@@ -97,7 +103,7 @@ export default function Info() {
   };
 
   const handleSubmit = () => {
-    const payload = {
+    const payload: PdfPayloadType = {
       firstName,
       lastName,
       email,
@@ -107,8 +113,8 @@ export default function Info() {
       socialLinks,
       workExperiences,
       educations,
+      additional,
     };
-    console.log(payload);
 
     localStorage.setItem("resume-draft", JSON.stringify(payload));
 
@@ -258,6 +264,25 @@ export default function Info() {
             <LuPlus strokeWidth={3} size={16} /> Add another education
           </p>
         </div>
+
+        {/* ADDITIONAL */}
+        <h1 className="text-3xl font-bold text-slate-800 mb-2">
+          Additional Information
+        </h1>
+        <p className="mb-10 text-sm opacity-80 w-[70%]">
+          The additional information section allows you to highlight unique
+          aspects of your background that don&apos;t fit into standard sections
+          like work experience or education. It provides a space to showcase
+          certifications, language skills, volunteer work, hobbies, or awards,
+          helping you stand out and demonstrate a well-rounded personality.
+        </p>
+        <Tiptap
+          defaultValue={additional}
+          callback={(htmlAdditional) => setAdditional(htmlAdditional)}
+          label="Details (Certifications, Skills, etc.)"
+          placeholder="Provide details such as certifications, skills, hobbies, or other achievements."
+        />
+        <p className="mb-20"></p>
 
         {isDraftSaved ? (
           <AlertBox

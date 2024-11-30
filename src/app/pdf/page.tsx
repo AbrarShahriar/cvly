@@ -4,8 +4,9 @@ import { PDFViewer } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import React, { Suspense } from "react";
 import { Font } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import { loadTemplate } from "@/lib/templates";
+import { PdfPayloadType } from "@/types";
 
-const payload = {
+const payload: PdfPayloadType = {
   firstName: "Shahriar",
   lastName: "Adib",
   email: "teste@gmail.com",
@@ -26,7 +27,8 @@ const payload = {
       position: "Freelance Front-End Developer",
       employer: "Siam Khandaker",
       location: "Noakhali",
-      description: "<p>etaeta etet etq tq et</p>",
+      description:
+        "<p>etaeta etet <strong>hello world</strong> e tq tq et Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel et quos ut at debitis minus neque laboriosam inventore ullam, odio consectetur, expedita assumenda perspiciatis qui placeat, totam molestias consequuntur commodi?</p>",
       startDate: "Thu Sep 08 2022",
       endDate: "Thu Dec 22 2022",
     },
@@ -53,6 +55,7 @@ const payload = {
       endDate: "Present",
     },
   ],
+  additional: "<p>Hello <strong>World</strong></p>",
 };
 
 function load() {
@@ -96,7 +99,7 @@ export default function Pdf() {
     >
       <div className="w-[100%]">
         <PDFViewer width={"100%"} height={"800"}>
-          {loadTemplate("Salem")(payload)}
+          {loadTemplate("Budapest")(payload)}
         </PDFViewer>
       </div>
     </Suspense>

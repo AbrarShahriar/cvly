@@ -42,4 +42,5 @@ export type PdfPayloadType = {
   socialLinks: SocialLink[];
   workExperiences: WorkExperienceType[];
   educations: EducationType[];
+  additional: string;
 };

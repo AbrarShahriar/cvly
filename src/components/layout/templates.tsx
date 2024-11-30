@@ -2,7 +2,7 @@
 
 import React from "react";
 import Template from "../Template";
-import { TemplateType } from "@/types";
+import { PdfPayloadType, TemplateType } from "@/types";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
@@ -72,7 +72,9 @@ export default function Templates() {
       return setOpenNoThemeModal(true);
     }
 
-    const payload = JSON.parse(localStorage.getItem("resume-draft") as string);
+    const payload: PdfPayloadType = JSON.parse(
+      localStorage.getItem("resume-draft") as string
+    );
 
     let selectedTemplate: TemplateNames = "Chicago";
     templates.forEach((template) => {

@@ -88,7 +88,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
           </View>
 
           {/* Professional */}
-          <View style={tw("flex-row items-start justify-between mb-6")}>
+          <View style={tw("flex-row items-start justify-between mb-4")}>
             <Text
               style={tw(`flex font-[ArimoBold] w-[20%] text-[${primaryColor}]`)}
             >
@@ -97,7 +97,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
             </Text>
             <View style={tw("w-[80%]")}>
               {payload.workExperiences.map((el, i) => (
-                <View key={i}>
+                <View key={i} style={tw("mb-4")}>
                   <Text
                     style={tw(`font-[ArimoBold] text-[${primaryColor}] mb-2`)}
                   >
@@ -113,8 +113,12 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
 
-                  <Html style={tw("-mt-2")}>
+                  <Html style={tw("mt-4")}>
                     {`<style>
+                    * {
+                  margin: 0;
+                  padding: 0;
+                }
                 .bold, strong {
                     font-family: "ArimoBold";
                 } 
@@ -123,10 +127,6 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                 } 
                 p, span, ul, li {
                     font-size: 10pt;
-                }
-                li {
-                    margin-bottom: 5px;
-                    margin-left: -20px;
                 }
           </style>
           
@@ -158,7 +158,6 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
 
                   <Html style={tw("-mt-4 -mb-4")}>
                     {`<style>
-
                 .bold, strong {
                     font-family: "ArimoBold";
                     } 
@@ -190,6 +189,41 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                   </Text>
                 </View>
               ))}
+            </View>
+          </View>
+
+          {/* Additional */}
+          <View style={tw("flex-row items-start justify-between mb-6")}>
+            <Text style={tw(`font-[ArimoBold] w-[20%] text-[${primaryColor}]`)}>
+              ADDITIONAL
+            </Text>
+            <View style={tw("w-[80%] ")}>
+              <Html>
+                {`<style>
+                * {
+                  margin: 0;
+                  padding: 0;
+                }
+                .bold, strong {
+                    font-family: "ArimoBold";
+                } 
+                .italic {
+                    font-family: "ArimoItalic";
+                } 
+                p, span, ul, li {
+                    font-size: 10pt;
+                }
+                li {
+                    margin-bottom: 5px;
+                    margin-left: -20px;
+                }
+          </style>
+          
+                ${ReactDOMServer.renderToStaticMarkup(
+                  parse(removePfromLi(payload.additional))
+                )}
+                `}
+              </Html>
             </View>
           </View>
         </View>

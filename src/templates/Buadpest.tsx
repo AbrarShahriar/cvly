@@ -96,7 +96,7 @@ export const Budapest = (payload: PdfPayloadType) => {
             </View>
             <View>
               {payload.workExperiences.map((el, i) => (
-                <View key={i}>
+                <View key={i} style={tw("mb-4")}>
                   <Text>
                     {parseDate(el.startDate).toUpperCase()}–
                     {el.endDate == TIME_PRESENT.toDateString()
@@ -107,8 +107,12 @@ export const Budapest = (payload: PdfPayloadType) => {
                     {el.position} | {el.employer} | {el.location}
                   </Text>
 
-                  <Html style={tw("-mt-4")}>
+                  <Html>
                     {`<style>
+                    * {
+                  margin: 0;
+                  padding: 0;
+                }
                 .bold, strong {
                     font-family: "CalibriBold";
                 } 
@@ -136,7 +140,7 @@ export const Budapest = (payload: PdfPayloadType) => {
 
           {/* Education */}
 
-          <View style={tw("flex mb-6")}>
+          <View style={tw("flex")}>
             <View style={tw(`bg-[${bgColor}] mb-4 w-[${16 * 4.5}pt]`)}>
               <Text
                 style={tw(
@@ -148,7 +152,7 @@ export const Budapest = (payload: PdfPayloadType) => {
             </View>
             <View>
               {payload.educations.map((el, i) => (
-                <View key={i}>
+                <View key={i} style={tw("mb-4")}>
                   <Text style={tw(`text-[${secondaryTextColor}]`)}>
                     {parseDate(el.startDate).toUpperCase()}-
                     {el.endDate == TIME_PRESENT.toDateString()
@@ -158,9 +162,12 @@ export const Budapest = (payload: PdfPayloadType) => {
                   <Text style={tw(`font-[CalibriBold] text-[${textColor}]`)}>
                     {el.degree} | {el.school} | {el.location}
                   </Text>
-                  <Html style={tw("-mt-4")}>
+                  <Html>
                     {`<style>
-
+* {
+                  margin: 0;
+                  padding: 0;
+                }
                 .bold, strong {
                     font-family: "CalibriBold";
                     } 
@@ -184,6 +191,48 @@ export const Budapest = (payload: PdfPayloadType) => {
                   </Html>
                 </View>
               ))}
+            </View>
+          </View>
+
+          {/* Additional */}
+          <View style={tw("flex mb-6")}>
+            <View style={tw(`bg-[${bgColor}] mb-4 w-[${35 * 4.5}pt]`)}>
+              <Text
+                style={tw(
+                  `text-[16pt]  translate-y-[6pt] text-[${textColor}] `
+                )}
+              >
+                Additional Information
+              </Text>
+            </View>
+            <View>
+              <Html>
+                {`<style>
+                * {
+                  margin: 0;
+                  padding: 0;
+                }
+                .bold, strong {
+                    font-family: "CalibriBold";
+                    } 
+                .italic {
+                    font-family: "CalibriItalic";
+                } 
+                p, span, ul, li {
+                    font-size: 10pt;
+                }
+                
+                li {
+                    margin-bottom: 5px;
+                    margin-left: -20px;
+                }
+          </style>
+          
+                ${ReactDOMServer.renderToStaticMarkup(
+                  parse(removePfromLi(payload.additional))
+                )}
+                `}
+              </Html>
             </View>
           </View>
         </View>
