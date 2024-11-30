@@ -28,7 +28,6 @@ export default function SocialLinkComp({
 
   const handleSocialLinkDelete = (e: any) => {
     e.preventDefault();
-    console.log(socialLink.id);
 
     setSocialLinks((prevLinks: SocialLink[]) =>
       prevLinks.filter((link) => link.id !== socialLink.id)

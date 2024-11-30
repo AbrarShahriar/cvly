@@ -30,7 +30,6 @@ export const Chicago = (payload: PdfPayloadType) => {
     family: "LoraItalic",
     src: "/fonts/Lora/Lora-Italic.ttf",
   });
-  console.log("Instantiating Chicago");
 
   return (
     <Document>

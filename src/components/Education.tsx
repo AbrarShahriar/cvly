@@ -40,7 +40,6 @@ export default function Education({
 
   const handleDelete = (e: any) => {
     e.preventDefault();
-    console.log(education.id);
 
     setEducations((prevEducations: WorkExperienceType[]) =>
       prevEducations.filter((ed) => ed.id !== education.id)

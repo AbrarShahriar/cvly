@@ -744,8 +744,6 @@ const DateTimePicker = React.forwardRef<
      * instead of resetting to 00:00
      */
     const handleSelect = (newDay: Date | undefined) => {
-      console.log(newDay);
-
       if (!newDay) return;
       if (!value) {
         onChange?.(newDay);

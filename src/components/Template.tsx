@@ -28,7 +28,6 @@ export default function Template({
     for (let i = 0; i < data.length; i++) {
       if (data[i].name == name) {
         data[i].selected = !defaultSelected;
-        console.log("Setting template to", name);
       } else {
         data[i].selected = false;
       }

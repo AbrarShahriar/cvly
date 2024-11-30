@@ -58,8 +58,6 @@ export default function Templates() {
     newVal: string | boolean,
     label: string
   ) => {
-    console.log(newVal);
-
     switch (label) {
       case "pdf":
         setSelectedExportOption("pdf");
