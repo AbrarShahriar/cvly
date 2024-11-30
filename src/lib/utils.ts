@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import type { renderToStaticMarkup as _renderToStaticMarkup } from "react-dom/server";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,3 +32,8 @@ export function removePfromLi(html: string) {
     "<li>$1<$2$3>"
   );
 }
+
+export let renderToStaticMarkup: typeof _renderToStaticMarkup;
+import("react-dom/server").then((module) => {
+  renderToStaticMarkup = module.renderToStaticMarkup;
+});

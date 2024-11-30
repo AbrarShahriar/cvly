@@ -29,15 +29,15 @@ const payload: PdfPayloadType = {
       location: "Noakhali",
       description:
         "<p>etaeta etet <strong>hello world</strong> e tq tq et Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel et quos ut at debitis minus neque laboriosam inventore ullam, odio consectetur, expedita assumenda perspiciatis qui placeat, totam molestias consequuntur commodi?</p>",
-      startDate: "Thu Sep 08 2022",
-      endDate: "Thu Dec 22 2022",
+      startDate: new Date().toDateString(),
+      endDate: new Date().toDateString(),
     },
     {
       id: "c8d94935-99b6-4c24-8d47-a7f38846cf77",
       position: "Freelance Front-End Developer",
       employer: "Siam Khandaker",
-      startDate: "Thu Sep 08 2022",
-      endDate: "Thu Dec 22 2022",
+      startDate: new Date().toDateString(),
+      endDate: new Date().toDateString(),
       location: "Noakhali",
       description:
         "<ul><li><p>Designed a user-friendly website for a graphics designer</p></li><li><p>Used vanilla technologies to ensure instant load</p></li></ul>",

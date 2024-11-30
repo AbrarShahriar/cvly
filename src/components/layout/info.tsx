@@ -20,69 +20,82 @@ import { Button } from "../ui/button";
 import AlertBox from "../AlertBox";
 
 export default function Info() {
-  const [defaultPayload, setDefaultPayload] = useState<PdfPayloadType>(
-    JSON.parse(localStorage.getItem("resume-draft") as string)
-  );
+  const defaultPayload: PdfPayloadType = {
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    location: "",
+    summary: "",
+    socialLinks: [
+      {
+        id: uuidv4(),
+        title: "",
+        link: "",
+      },
+    ],
+    workExperiences: [
+      {
+        id: uuidv4(),
+        position: "",
+        employer: "",
+        location: "",
+        description: ``,
+        startDate: new Date().toDateString(),
+        endDate: new Date().toDateString(),
+      },
+    ],
+    educations: [
+      {
+        id: uuidv4(),
+        school: "",
+        degree: "",
+        location: "",
+        description: "",
+        startDate: new Date().toDateString(),
+        endDate: new Date().toDateString(),
+      },
+    ],
+    additional: "",
+  };
 
   const [isDraftSaved, setIsDraftSaved] = useState(false);
-  const [firstName, setFirstName] = useState<string>(
-    defaultPayload && defaultPayload.firstName
-  );
-  const [lastName, setLastName] = useState<string>(
-    defaultPayload && defaultPayload.lastName
-  );
-  const [email, setEmail] = useState(defaultPayload && defaultPayload.email);
-  const [phone, setPhone] = useState(defaultPayload && defaultPayload.phone);
-  const [location, setLocation] = useState(
-    defaultPayload && defaultPayload.location
-  );
-  const [summary, setSummary] = useState(
-    defaultPayload && defaultPayload.summary
-  );
+  const [firstName, setFirstName] = useState<string>(defaultPayload.firstName);
+  const [lastName, setLastName] = useState<string>(defaultPayload.lastName);
+  const [email, setEmail] = useState<string>(defaultPayload.email);
+  const [phone, setPhone] = useState<string>(defaultPayload.phone);
+  const [location, setLocation] = useState<string>(defaultPayload.location);
+  const [summary, setSummary] = useState<string>(defaultPayload.summary);
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>(
-    defaultPayload
-      ? defaultPayload.socialLinks
-      : [
-          {
-            id: uuidv4(),
-            title: "",
-            link: "",
-          },
-        ]
+    defaultPayload.socialLinks
   );
   const [workExperiences, setWorkExperiences] = useState<WorkExperienceType[]>(
-    defaultPayload
-      ? defaultPayload.workExperiences
-      : [
-          {
-            id: uuidv4(),
-            position: "",
-            employer: "",
-            location: "",
-            description: ``,
-            startDate: new Date().toDateString(),
-            endDate: new Date().toDateString(),
-          },
-        ]
+    defaultPayload.workExperiences
   );
   const [educations, setEducations] = useState<EducationType[]>(
-    defaultPayload
-      ? defaultPayload.educations
-      : [
-          {
-            id: uuidv4(),
-            school: "",
-            degree: "",
-            location: "",
-            description: "",
-            startDate: new Date().toDateString(),
-            endDate: new Date().toDateString(),
-          },
-        ]
+    defaultPayload.educations
   );
-  const [additional, setAdditional] = useState(
-    defaultPayload && defaultPayload.additional
+  const [additional, setAdditional] = useState<string>(
+    defaultPayload.additional
   );
+
+  useEffect(() => {
+    const draft: PdfPayloadType = JSON.parse(
+      localStorage.getItem("resume-draft") as string
+    );
+    if (draft) {
+      setFirstName(draft.firstName);
+      setLastName(draft.lastName);
+      setEmail(draft.email);
+      setPhone(draft.phone);
+      setLocation(draft.location);
+      setSummary(draft.summary);
+      setSocialLinks(draft.socialLinks);
+      setWorkExperiences(draft.workExperiences);
+      setEducations(draft.educations);
+      setAdditional(draft.additional);
+    }
+  }, []);
 
   const handleAddSocialLink = (e: any) => {
     e.preventDefault();
@@ -308,13 +321,13 @@ export default function Info() {
           label="Details (Certifications, Skills, etc.)"
           placeholder="Provide details such as certifications, skills, hobbies, or other achievements."
         />
-        <p className="mb-20"></p>
+        <p className="mb-12"></p>
 
         {isDraftSaved ? (
           <AlertBox
             className="mb-6"
             variant="warning"
-            message="A draft is already saved, proceed to overwrite!"
+            message="A draft is already saved, proceed to overwrite! If you edit the fields, remember to overwrite the saved draft (save again)."
           />
         ) : (
           <AlertBox

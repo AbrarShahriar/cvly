@@ -4,7 +4,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { useEditor, EditorContent } from "@tiptap/react";
 import { LuBold, LuItalic, LuList, LuListOrdered } from "react-icons/lu";
 import { Label } from "@radix-ui/react-label";
-import React from "react";
+import React, { useEffect } from "react";
 
 import Italic from "@tiptap/extension-italic";
 import Bold from "@tiptap/extension-bold";
@@ -59,6 +59,10 @@ const Tiptap = ({
     content: defaultValue,
     immediatelyRender: false,
   });
+
+  useEffect(() => {
+    editor?.commands.setContent(defaultValue);
+  }, [defaultValue]);
 
   if (!editor) {
     return null;

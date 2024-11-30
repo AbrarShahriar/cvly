@@ -1,4 +1,4 @@
-import { Budapest } from "@/templates/Buadpest";
+import { Budapest } from "@/templates/Budapest";
 import { Chicago } from "@/templates/Chicago";
 import { Salem } from "@/templates/Salem";
 import { WhiteHouse } from "@/templates/WhiteHouse";

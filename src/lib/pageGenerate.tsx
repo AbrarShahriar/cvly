@@ -11,6 +11,7 @@ import React from "react";
 
 import { PdfPayloadType } from "@/types";
 import { loadTemplate, TemplateNames } from "@/lib/templates";
+import ReactDOMServer from "react-dom/server";
 
 const payload = {
   firstName: "Shahriar",
@@ -104,4 +105,16 @@ export const generatePdf = ({
   }
 
   return loadTemplate(selectedTemplate)(payload);
+};
+
+export const generateHtml = ({
+  payload,
+  selectedTemplate,
+}: {
+  payload: PdfPayloadType;
+  selectedTemplate: TemplateNames;
+}) => {
+  return ReactDOMServer.renderToStaticMarkup(
+    loadTemplate(selectedTemplate)(payload)
+  );
 };

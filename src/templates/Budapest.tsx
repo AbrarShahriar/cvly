@@ -2,9 +2,9 @@ import { PdfPayloadType } from "@/types";
 import { Document, Text, View, Page, Link } from "@react-pdf/renderer";
 import Html from "react-pdf-html";
 import { createTw } from "react-pdf-tailwind";
-import ReactDOMServer from "react-dom/server";
+// import ReactDOMServer from "react-dom/server";
 import parse from "html-react-parser";
-import { parseDate, removePfromLi } from "@/lib/utils";
+import { parseDate, removePfromLi, renderToStaticMarkup } from "@/lib/utils";
 import { Font } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import { TIME_PRESENT } from "@/components/ui/datetimepicker";
 
@@ -75,7 +75,7 @@ export const Budapest = (payload: PdfPayloadType) => {
                             }
                             </style>
                             
-                            ${ReactDOMServer.renderToStaticMarkup(
+                            ${renderToStaticMarkup(
                               parse(removePfromLi(payload.summary))
                             )}
           `}
@@ -99,7 +99,7 @@ export const Budapest = (payload: PdfPayloadType) => {
                 <View key={i} style={tw("mb-4")}>
                   <Text>
                     {parseDate(el.startDate).toUpperCase()}–
-                    {el.endDate == TIME_PRESENT.toDateString()
+                    {el.endDate == new Date("1000-10-10").toDateString()
                       ? "Present"
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
@@ -128,9 +128,7 @@ export const Budapest = (payload: PdfPayloadType) => {
                 }
           </style>
           
-                ${ReactDOMServer.renderToStaticMarkup(
-                  parse(removePfromLi(el.description))
-                )}
+                ${renderToStaticMarkup(parse(removePfromLi(el.description)))}
                 `}
                   </Html>
                 </View>
@@ -155,7 +153,7 @@ export const Budapest = (payload: PdfPayloadType) => {
                 <View key={i} style={tw("mb-4")}>
                   <Text style={tw(`text-[${secondaryTextColor}]`)}>
                     {parseDate(el.startDate).toUpperCase()}-
-                    {el.endDate == TIME_PRESENT.toDateString()
+                    {el.endDate == new Date("1000-10-10").toDateString()
                       ? "Present"
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
@@ -184,9 +182,7 @@ export const Budapest = (payload: PdfPayloadType) => {
                 }
           </style>
           
-                ${ReactDOMServer.renderToStaticMarkup(
-                  parse(removePfromLi(el.description))
-                )}
+                ${renderToStaticMarkup(parse(removePfromLi(el.description)))}
                 `}
                   </Html>
                 </View>
@@ -228,7 +224,7 @@ export const Budapest = (payload: PdfPayloadType) => {
                 }
           </style>
           
-                ${ReactDOMServer.renderToStaticMarkup(
+                ${renderToStaticMarkup(
                   parse(removePfromLi(payload.additional))
                 )}
                 `}

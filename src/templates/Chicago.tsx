@@ -9,9 +9,8 @@ import {
 } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import Html from "react-pdf-html";
 import { createTw } from "react-pdf-tailwind";
-import ReactDOMServer from "react-dom/server";
 import parse from "html-react-parser";
-import { parseDate, removePfromLi } from "@/lib/utils";
+import { parseDate, removePfromLi, renderToStaticMarkup } from "@/lib/utils";
 import { TIME_PRESENT } from "@/components/ui/datetimepicker";
 
 const tw = createTw({});
@@ -75,9 +74,7 @@ export const Chicago = (payload: PdfPayloadType) => {
                 }
           </style>
           
-          ${ReactDOMServer.renderToStaticMarkup(
-            parse(removePfromLi(payload.summary))
-          )}
+          ${renderToStaticMarkup(parse(removePfromLi(payload.summary)))}
           `}
           </Html>
         </View>
@@ -107,7 +104,7 @@ export const Chicago = (payload: PdfPayloadType) => {
                   <Text>{el.position}</Text>
                   <Text style={tw("font-[LoraItalic]")}>
                     {parseDate(el.startDate)}-
-                    {el.endDate == TIME_PRESENT.toDateString()
+                    {el.endDate == new Date("1000-10-10").toDateString()
                       ? "Present"
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
@@ -130,9 +127,7 @@ export const Chicago = (payload: PdfPayloadType) => {
                 }
           </style>
           
-          ${ReactDOMServer.renderToStaticMarkup(
-            parse(removePfromLi(el.description))
-          )}
+          ${renderToStaticMarkup(parse(removePfromLi(el.description)))}
           `}
                 </Html>
               </View>
@@ -165,7 +160,7 @@ export const Chicago = (payload: PdfPayloadType) => {
                   <Text>{el.degree}</Text>
                   <Text style={tw("font-[LoraItalic]")}>
                     {parseDate(el.startDate)}-
-                    {el.endDate == TIME_PRESENT.toDateString()
+                    {el.endDate == new Date("1000-10-10").toDateString()
                       ? "Present"
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
@@ -187,9 +182,7 @@ export const Chicago = (payload: PdfPayloadType) => {
                 }
           </style>
           
-          ${ReactDOMServer.renderToStaticMarkup(
-            parse(removePfromLi(el.description))
-          )}
+          ${renderToStaticMarkup(parse(removePfromLi(el.description)))}
           `}
                 </Html>
               </View>
@@ -225,9 +218,7 @@ export const Chicago = (payload: PdfPayloadType) => {
                 }
           </style>
           
-          ${ReactDOMServer.renderToStaticMarkup(
-            parse(removePfromLi(payload.additional))
-          )}
+          ${renderToStaticMarkup(parse(removePfromLi(payload.additional)))}
           `}
             </Html>
           </View>

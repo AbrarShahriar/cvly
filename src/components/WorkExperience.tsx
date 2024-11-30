@@ -47,7 +47,6 @@ export default function WorkExperience({
 
   const handleDelete = (e: any) => {
     e.preventDefault();
-    console.log(workExperience.id);
 
     setWorkExperiences((prevExperiences: WorkExperienceType[]) =>
       prevExperiences.filter(

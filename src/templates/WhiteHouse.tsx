@@ -9,9 +9,8 @@ import {
 } from "@react-pdf/renderer/lib/react-pdf.browser.min";
 import Html from "react-pdf-html";
 import { createTw } from "react-pdf-tailwind";
-import ReactDOMServer from "react-dom/server";
 import parse from "html-react-parser";
-import { parseDate, removePfromLi } from "@/lib/utils";
+import { parseDate, removePfromLi, renderToStaticMarkup } from "@/lib/utils";
 import { TIME_PRESENT } from "@/components/ui/datetimepicker";
 
 const tw = createTw({});
@@ -79,7 +78,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                             }
                             </style>
                             
-                            ${ReactDOMServer.renderToStaticMarkup(
+                            ${renderToStaticMarkup(
                               parse(removePfromLi(payload.summary))
                             )}
           `}
@@ -108,7 +107,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                   </Text>
                   <Text style={tw("font-[ArimoItalic]")}>
                     {parseDate(el.startDate)}-
-                    {el.endDate == TIME_PRESENT.toDateString()
+                    {el.endDate == new Date("1000-10-10").toDateString()
                       ? "Present"
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
@@ -130,9 +129,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                 }
           </style>
           
-                ${ReactDOMServer.renderToStaticMarkup(
-                  parse(removePfromLi(el.description))
-                )}
+                ${renderToStaticMarkup(parse(removePfromLi(el.description)))}
                 `}
                   </Html>
                 </View>
@@ -151,7 +148,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                 <View key={i}>
                   <Text style={tw(`font-[ArimoBold] text-[${primaryColor}]`)}>
                     {el.degree},{" "}
-                    {el.endDate == TIME_PRESENT.toDateString()
+                    {el.endDate == new Date("1000-10-10").toDateString()
                       ? "Present"
                       : parseDate(el.endDate).toUpperCase()}
                   </Text>
@@ -179,9 +176,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                 }
           </style>
           
-                ${ReactDOMServer.renderToStaticMarkup(
-                  parse(removePfromLi(el.description))
-                )}
+                ${renderToStaticMarkup(parse(removePfromLi(el.description)))}
                 `}
                   </Html>
                   <Text style={tw(`font-[ArimoItalic]`)}>
@@ -219,7 +214,7 @@ export const WhiteHouse = (payload: PdfPayloadType) => {
                 }
           </style>
           
-                ${ReactDOMServer.renderToStaticMarkup(
+                ${renderToStaticMarkup(
                   parse(removePfromLi(payload.additional))
                 )}
                 `}
